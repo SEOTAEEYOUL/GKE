@@ -172,6 +172,30 @@ taeeyoul@cloudshell:~ (ttc-team-14)$
 
 ![Ingress BackendConfig 및 FrontendConfig 개요](https://cloud.google.com/kubernetes-engine/images/ingress-configs.svg?hl=ko)
 
+* Deployment  
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  selector:
+    matchLabels:
+      # purpose: bsc-config-demo
+      app: hello
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        # purpose: bsc-config-demo
+        app: hello
+    spec:
+      containers:
+      - name: hello
+        image: gcr.io/google-samples/hello-app:1.0
+```
+
+
 * FrontendConfig  
 ```
 apiVersion: networking.k8s.io/v1beta1
@@ -182,46 +206,59 @@ metadata:
 ...
 ```
   
-* BackendConfig  
+* BackendConfig   
 ```
-apiVersion: cloud.google.com/v1beta1
-kind: BackendConfig
+apiVersion: networking.k8s.io/v1beta
+kind: Ingress
 metadata:
-  name: hello-backendconfig
+  name: hello-ingress
 spec:
-  timeoutSec: 40
-  connectionDraining:
-    drainingTimeoutSec: 60
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: hello-service
+          servicePort: 80
 ```
 
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    cloud.google.com/backend-config: '{"default": "hello-backendconfig"}'
-```
-  
 * Service  
 ```
 apiVersion: v1
 kind: Service
 metadata:
+  name: hello-service
+  labels:
+    # purpose: bsc-config-demo
+    app: hello
   annotations:
-    cloud.google.com/backend-config: '{"ports": {
-    "port-1":"backendconfig-1",
-    "port-2":"backendconfig-2"
-    }}'
+    cloud.google.com/backend-config: '{"ports": {"80":"hello-backendconfig"}}'
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
+  type: ClusterIP
+  selector:
+    # purpose: bsc-config-demo
+    app: hello
   ports:
-  - name:service-name-1
-    port: 8001
+  - port: 80
     protocol: TCP
-    targetPort: service-port-1
-  - name: service-name-2
-    port: 8002
-    protocol: TCP
-    targetPort: service-port-2
-...
+    targetPort: 8080
+```
+
+* Ingress  
+```
+apiVersion: networking.k8s.io/v1beta
+kind: Ingress
+metadata:
+  name: hello-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: hello-service
+          servicePort: 80
 ```
 
 #### Ingress 생성 및 조회하기
