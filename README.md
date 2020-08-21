@@ -1,7 +1,9 @@
 # GKE
 
 [GKE 빠른 시작](https://cloud.google.com/kubernetes-engine/docs/quickstart)
+[Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)
 [GKE Sample](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)
+
 
 
 ### 셸 선택
@@ -156,6 +158,26 @@ taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get deploy,svc
 NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 service/kubernetes   ClusterIP   172.16.0.1   <none>        443/TCP   18h
 taeeyoul@cloudshell:~ (ttc-team-14)$
+```
+
+### Ingress
+
+![Ingress BackendConfig 및 FrontendConfig 개요](https://cloud.google.com/kubernetes-engine/images/ingress-configs.svg?hl=ko)
+
+```
+aeeyoul@cloudshell:~ (ttc-team-14)$ kubectl expose deployment hello-server --type ClusterIP   --port 80 --target-port 8080
+service/hello-server exposed
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get pod,svc,ep
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/hello-server-5bfd595c65-242n2   1/1     Running   0          36m
+pod/hello-server-5bfd595c65-hnngm   1/1     Running   0          34m
+pod/hello-server-5bfd595c65-qk744   1/1     Running   0          34m
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/hello-server   ClusterIP   172.16.201.99   <none>        80/TCP    33s
+service/kubernetes     ClusterIP   172.16.0.1      <none>        443/TCP   19h
+NAME                     ENDPOINTS                                             AGE
+endpoints/hello-server   192.168.0.3:8080,192.168.1.10:8080,192.168.2.4:8080   33s
+endpoints/kubernetes     34.64.109.235:443                                     19h
 ```
   
 #### Cluster 삭제
