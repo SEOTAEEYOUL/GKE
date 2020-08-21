@@ -109,6 +109,16 @@ NAME                            READY   STATUS    RESTARTS   AGE
 hello-server-5bfd595c65-242n2   1/1     Running   0          2m25s
 hello-server-5bfd595c65-hnngm   1/1     Running   0          16s
 hello-server-5bfd595c65-qk744   1/1     Running   0          16s
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl top pod
+NAME                            CPU(cores)   MEMORY(bytes)
+hello-server-5bfd595c65-242n2   1m           1Mi
+hello-server-5bfd595c65-hnngm   0m           1Mi
+hello-server-5bfd595c65-qk744   0m           1Mi
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl top node
+NAME                                           CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+gke-cluster-team14-worker-pool-4ba9331e-k3ss   131m         6%     880Mi           14%
+gke-cluster-team14-worker-pool-b758b7c5-zsnc   85m          4%     730Mi           12%
+gke-cluster-team14-worker-pool-fee3fe68-ht5w   82m          4%     711Mi           11%
 ```
   
 ##### 접속하기  
