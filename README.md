@@ -160,12 +160,59 @@ service/kubernetes   ClusterIP   172.16.0.1   <none>        443/TCP   18h
 taeeyoul@cloudshell:~ (ttc-team-14)$
 ```
 
-### Ingress
+### Ingress  
+* Google Cloud VPC 네트워크와 긴밀하게 통합되는 엔터프라이즈급 부하 분산 기능을 제공 
+* FrontendConfig 및 BackendConfig 커스텀 리소스 정의(CRD)를 사용하면 부하 분산기를 추가로 맞춤설정할 수 있음 
+  * FrontendConfig : 인그레스 객체에서 참조  
+  * BackendConfig는 서비스 객체에서 참조  
+* FrontendConfig CRD와 BackendConfig CRD는 해당하는 인그레스 및 서비스 리소스와 동일한 수명 주기를 공유하며 종종 함께 배포됨
 
 ![Ingress BackendConfig 및 FrontendConfig 개요](https://cloud.google.com/kubernetes-engine/images/ingress-configs.svg?hl=ko)
 
+* FrontendConfig  
 ```
-aeeyoul@cloudshell:~ (ttc-team-14)$ kubectl expose deployment hello-server --type ClusterIP   --port 80 --target-port 8080
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    networking.gke.io/v1beta1.FrontendConfig: "frontendconfig"
+...
+```
+  
+* BackendConfig  
+```
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/backend-config: '{"default": "my-backendconfig"}'
+```
+  
+* Service  
+```
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {
+    "port-1":"backendconfig-1",
+    "port-2":"backendconfig-2"
+    }}'
+spec:
+  ports:
+  - name:service-name-1
+    port: 8001
+    protocol: TCP
+    targetPort: service-port-1
+  - name: service-name-2
+    port: 8002
+    protocol: TCP
+    targetPort: service-port-2
+...
+```
+
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl expose deployment hello-server --type ClusterIP   --port 80 --target-port 8080
 service/hello-server exposed
 taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get pod,svc,ep
 NAME                                READY   STATUS    RESTARTS   AGE
