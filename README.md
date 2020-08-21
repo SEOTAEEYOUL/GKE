@@ -123,6 +123,22 @@ gke-cluster-team14-worker-pool-b758b7c5-zsnc   85m          4%     730Mi        
 gke-cluster-team14-worker-pool-fee3fe68-ht5w   82m          4%     711Mi           11%
 ```
   
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl expose deployment hello-server --type ClusterIP   --port 80 --target-port 8080
+service/hello-server exposed
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get pod,svc,ep
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/hello-server-5bfd595c65-242n2   1/1     Running   0          36m
+pod/hello-server-5bfd595c65-hnngm   1/1     Running   0          34m
+pod/hello-server-5bfd595c65-qk744   1/1     Running   0          34m
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/hello-server   ClusterIP   172.16.201.99   <none>        80/TCP    33s
+service/kubernetes     ClusterIP   172.16.0.1      <none>        443/TCP   19h
+NAME                     ENDPOINTS                                             AGE
+endpoints/hello-server   192.168.0.3:8080,192.168.1.10:8080,192.168.2.4:8080   33s
+endpoints/kubernetes     34.64.109.235:443                                     19h
+```
+
 ##### 접속하기  
 http://34.64.175.157  
 ```
@@ -290,6 +306,11 @@ taeeyoul@cloudshell:~ (ttc-team-14)$ export BES="k8s-be-32171--011a2b9a78e503d3"
 taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud compute backend-services describe ${BES} --global | grep -e "drainingTimeoutSec" -e "timeoutSec"
   drainingTimeoutSec: 0
 timeoutSec: 30
+taeeyoul@cloudshell:~ (ttc-team-14)$ curl http://35.227.225.26
+Hello, world!
+Version: 1.0.0
+Hostname: hello-67b75894d7-brcmp
+taeeyoul@cloudshell:~ (ttc-team-14)$
 ```
 
 #### BackendConfig 를 사용한 CloudCDN 사용 설정  
@@ -309,21 +330,6 @@ spec:
       queryStringWhitelist: queryStringWhitelist
 ```
 
-```
-taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl expose deployment hello-server --type ClusterIP   --port 80 --target-port 8080
-service/hello-server exposed
-taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get pod,svc,ep
-NAME                                READY   STATUS    RESTARTS   AGE
-pod/hello-server-5bfd595c65-242n2   1/1     Running   0          36m
-pod/hello-server-5bfd595c65-hnngm   1/1     Running   0          34m
-pod/hello-server-5bfd595c65-qk744   1/1     Running   0          34m
-NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
-service/hello-server   ClusterIP   172.16.201.99   <none>        80/TCP    33s
-service/kubernetes     ClusterIP   172.16.0.1      <none>        443/TCP   19h
-NAME                     ENDPOINTS                                             AGE
-endpoints/hello-server   192.168.0.3:8080,192.168.1.10:8080,192.168.2.4:8080   33s
-endpoints/kubernetes     34.64.109.235:443                                     19h
-```
   
 #### Cluster 삭제
 ```
