@@ -160,6 +160,9 @@ service/kubernetes   ClusterIP   172.16.0.1   <none>        443/TCP   18h
 taeeyoul@cloudshell:~ (ttc-team-14)$
 ```
 
+---
+
+
 ### Ingress  
 * Google Cloud VPC 네트워크와 긴밀하게 통합되는 엔터프라이즈급 부하 분산 기능을 제공 
 * FrontendConfig 및 BackendConfig 커스텀 리소스 정의(CRD)를 사용하면 부하 분산기를 추가로 맞춤설정할 수 있음 
@@ -181,11 +184,21 @@ metadata:
   
 * BackendConfig  
 ```
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: hello-backendconfig
+spec:
+  timeoutSec: 40
+  connectionDraining:
+    drainingTimeoutSec: 60
+```
+
 apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    cloud.google.com/backend-config: '{"default": "my-backendconfig"}'
+    cloud.google.com/backend-config: '{"default": "hello-backendconfig"}'
 ```
   
 * Service  
@@ -209,6 +222,54 @@ spec:
     protocol: TCP
     targetPort: service-port-2
 ...
+```
+
+#### Ingress 생성 및 조회하기
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl create -f hello-deploy.yaml
+deployment.apps/hello created
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl apply -f hello-backendconfig.yaml
+backendconfig.cloud.google.com/hello-backendconfig created
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl apply -f hello-service.yaml
+service/hello-service configured
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl apply -f hello-ingress.yaml
+ingress.networking.k8s.io/hello-ingress created
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get backendconfig,deploy,svc,ep,ing
+NAME                                                 AGE
+backendconfig.cloud.google.com/hello-backendconfig   23m
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/hello   2/2     2            2           112s
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/hello-service   ClusterIP   172.16.164.82   <none>        80/TCP    18m
+service/kubernetes      ClusterIP   172.16.0.1      <none>        443/TCP   20h
+NAME                      ENDPOINTS                           AGE
+endpoints/hello-service   192.168.0.4:8080,192.168.2.5:8080   18m
+endpoints/kubernetes      34.64.109.235:443                   20h
+NAME                               HOSTS   ADDRESS         PORTS   AGE
+ingress.extensions/hello-ingress   *       35.227.225.26   80      17m
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl describe ingress hello-ingress | grep ingress.kubernetes.io/backends
+Annotations:  ingress.kubernetes.io/backends: {"k8s-be-32171--011a2b9a78e503d3":"HEALTHY","k8s1-011a2b9a-default-hello-service-80-741e0899":"HEALTHY"}
+taeeyoul@cloudshell:~ (ttc-team-14)$ export BES="k8s-be-32171--011a2b9a78e503d3"
+taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud compute backend-services describe ${BES} --global | grep -e "drainingTimeoutSec" -e "timeoutSec"
+  drainingTimeoutSec: 0
+timeoutSec: 30
+```
+
+#### BackendConfig 를 사용한 CloudCDN 사용 설정  
+```
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: my-backendconfig
+spec:
+  cdn:
+    enabled: cdnEnabled
+    cachePolicy:
+      includeHost: includeHost
+      includeProtocol:includeProtocol
+      includeQueryString: includeQueryString
+      queryStringBlacklist:queryStringBlacklist
+      queryStringWhitelist: queryStringWhitelist
 ```
 
 ```

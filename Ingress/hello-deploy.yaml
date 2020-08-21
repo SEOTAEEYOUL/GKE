@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  selector:
+    matchLabels:
+      # purpose: bsc-config-demo
+      app: hello
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        # purpose: bsc-config-demo
+        app: hello
+    spec:
+      containers:
+      - name: hello
+        image: gcr.io/google-samples/hello-app:1.0

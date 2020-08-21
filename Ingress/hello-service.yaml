@@ -1,0 +1,20 @@
+# hello-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+  labels:
+    # purpose: bsc-config-demo
+    app: hello
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"80":"hello-backendconfig"}}'
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: ClusterIP
+  selector:
+    # purpose: bsc-config-demo
+    app: hello
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
