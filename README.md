@@ -90,6 +90,27 @@ NAME                     ENDPOINTS           AGE
 endpoints/hello-server   192.168.2.3:8080    107s
 endpoints/kubernetes     34.64.109.235:443   18h
 ```
+
+  
+#### Scale-out (kubectl scale ...)
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get pod
+NAME                            READY   STATUS    RESTARTS   AGE
+hello-server-5bfd595c65-242n2   1/1     Running   0          2m5s
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl scale deployment hello-server --replicas=3
+kdeployment.apps/hello-server scaled
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get pod
+NAME                            READY   STATUS              RESTARTS   AGE
+hello-server-5bfd595c65-242n2   1/1     Running             0          2m11s
+hello-server-5bfd595c65-hnngm   0/1     ContainerCreating   0          2s
+hello-server-5bfd595c65-qk744   0/1     ContainerCreating   0          2s
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get pod
+NAME                            READY   STATUS    RESTARTS   AGE
+hello-server-5bfd595c65-242n2   1/1     Running   0          2m25s
+hello-server-5bfd595c65-hnngm   1/1     Running   0          16s
+hello-server-5bfd595c65-qk744   1/1     Running   0          16s
+```
+  
 ##### 접속하기  
 http://34.64.175.157  
 ```
