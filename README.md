@@ -200,16 +200,42 @@ spec:
     matchLabels:
       # purpose: bsc-config-demo
       app: hello
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
         # purpose: bsc-config-demo
         app: hello
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operatior: In
+                  values:
+                  - hello
+              topologyKey: kubernetes.io/hostname
+            weight: 100
       containers:
       - name: hello
         image: gcr.io/google-samples/hello-app:1.0
+```
+
+* podAntiAffinity 추가 후  
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get deploy,pod,svc
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/hello   3/3     3            3           3d
+NAME                        READY   STATUS    RESTARTS   AGE
+pod/hello-cf68b44cc-jz6k2   1/1     Running   0          30m
+pod/hello-cf68b44cc-lch9v   1/1     Running   0          30m
+pod/hello-cf68b44cc-x9qzp   1/1     Running   0          30m
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/hello-service   ClusterIP   172.16.164.82   <none>        80/TCP    3d
+service/kubernetes      ClusterIP   172.16.0.1      <none>        443/TCP   3d20h
 ```
 
 

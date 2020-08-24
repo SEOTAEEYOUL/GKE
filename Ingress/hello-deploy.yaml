@@ -7,13 +7,25 @@ spec:
     matchLabels:
       # purpose: bsc-config-demo
       app: hello
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
         # purpose: bsc-config-demo
         app: hello
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operatior: In
+                  values:
+                  - hello
+              topologyKey: kubernetes.io/hostname
+            weight: 100
       containers:
       - name: hello
         image: gcr.io/google-samples/hello-app:1.0
