@@ -3,6 +3,8 @@
 ### Install
 
 ```
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
+chmod 700 get_helm.sh
 taeeyoul@cloudshell:~ (ttc-team-14)$ ./get_helm.sh
 Helm v3.3.0 is available. Changing from version v3.2.1.
 Downloading https://get.helm.sh/helm-v3.3.0-linux-amd64.tar.gz
@@ -13,6 +15,8 @@ taeeyoul@cloudshell:~ (ttc-team-14)$ which helm
 taeeyoul@cloudshell:~ (ttc-team-14)$ helm version
 version.BuildInfo{Version:"v3.3.0", GitCommit:"8a4aeec08d67a7b84472007529e8097ec3742105", GitTreeState:"dirty", GoVersion:"go1.14.7"}
 ```
+
+### Helm 초기화
 
 ### Helm Repo 추가  
 ```

@@ -3,6 +3,8 @@
 [GKE 빠른 시작](https://cloud.google.com/kubernetes-engine/docs/quickstart)  
 [Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)  
 [GKE Sample](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)  
+  - [Redis 및 PHP로 방명록 만들기](https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook?hl=ko)
+  - [Persistent Disk 및 Cloud SQL로 GKE에 WordPress 배포](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk?hl=ko)
 [Kubernetes Applications](https://github.com/kubernetes-sigs/application/blob/master/README.md)
 
 
