@@ -2,10 +2,10 @@
 
 ### Link
 [인그레스 기능](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)
-[외부 HTTP(S) 부하 분산용 인그레스 ](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb?hl=ko)
-[내부 부하 분산용 인그레스 구성](https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balance-ingress?hl=ko)
+[외부 HTTP(S) 부하 분산용 인그레스 ](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb?hl=ko)  
+[내부 부하 분산용 인그레스 구성](https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balance-ingress?hl=ko)  
 
-![Ingress BackendConfig 및 FrontendConfig 개요](https://cloud.google.com/kubernetes-engine/images/ingress-configs.svg?hl=ko)
+![Ingress BackendConfig 및 FrontendConfig 개요](https://cloud.google.com/kubernetes-engine/images/ingress-configs.svg?hl=ko)  
 
 ### 내부 인그레스 주석 요약  
 #### 인그레스 주석  
