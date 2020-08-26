@@ -1,5 +1,12 @@
 # Ingress
 
+### Link
+[인그레스 기능](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)
+[외부 HTTP(S) 부하 분산용 인그레스 ](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb?hl=ko)
+[내부 부하 분산용 인그레스 구성](https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balance-ingress?hl=ko)
+
+![Ingress BackendConfig 및 FrontendConfig 개요](https://cloud.google.com/kubernetes-engine/images/ingress-configs.svg?hl=ko)
+
 ### 내부 인그레스 주석 요약  
 #### 인그레스 주석  
 |주석|설명| 
@@ -10,7 +17,7 @@
 
 #### 인그레스와 관련된 서비스 주석  
 |주석|설명| 
-|주석	설명
+|---|:---|
 |beta.cloud.google.com/backend-config | 이 주석을 사용하여 servicePort와 연결된 백엔드 서비스를 구성합니다. </br> 자세한 내용은 인그레스 기능을 참조하세요. |  
 |cloud.google.com/neg | 이 주석을 사용하여 부하 분산기에서 네트워크 엔드포인트 그룹을 사용하도록 지정합니다. </br> 컨테이너 기반 부하 분산 사용을 참조하세요. |  
 
