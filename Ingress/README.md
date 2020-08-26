@@ -2,15 +2,17 @@
 
 ### 내부 인그레스 주석 요약  
 #### 인그레스 주석  
-주석	설명
-kubernetes.io/ingress.class	내부 인그레스에 대해 'gce-internal'로 지정됩니다. 클래스가 지정되지 않았으면 기본적으로 인그레스 리소스가 외부 인그레스로 해석됩니다.
-kubernetes.io/ingress.allow-http	클라이언트와 HTTP(S) 부하 분산기 간에 HTTP 트래픽을 허용할지 여부를 지정합니다. 가능한 값은 'true', 'false'입니다. 기본값은 'true'이지만, 내부 부하 분산을 위해 HTTPS를 사용하는 경우 'false'로 설정해야 합니다. HTTP 중지를 참조하세요.
-ingress.gcp.kubernetes.io/pre-shared-cert	Google Cloud 프로젝트에 인증서와 키를 업로드할 수 있습니다. 이 주석을 사용하여 인증서와 키를 참조합니다. HTTP(S) 부하 분산에서 여러 SSL 인증서 사용을 참조하세요.
+|주석|설명| 
+|---|:---|
+|kubernetes.io/ingress.class | 내부 인그레스에 대해 'gce-internal'로 지정됩니다. </br>클래스가 지정되지 않았으면 기본적으로 인그레스 리소스가 외부 인그레스로 해석됩니다. |  
+|kubernetes.io/ingress.allow-http | 클라이언트와 HTTP(S) 부하 분산기 간에 HTTP 트래픽을 허용할지 여부를 지정합니다. </br> 가능한 값은 'true', 'false'입니다. </br> 기본값은 'true'이지만, 내부 부하 분산을 위해 HTTPS를 사용하는 경우 'false'로 설정해야 합니다. </br> HTTP 중지를 참조하세요. |  
+|ingress.gcp.kubernetes.io/pre-shared-cert | Google Cloud 프로젝트에 인증서와 키를 업로드할 수 있습니다. </br> 이 주석을 사용하여 인증서와 키를 참조합니다. </br> HTTP(S) 부하 분산에서 여러 SSL 인증서 사용을 참조하세요. |  
 
 #### 인그레스와 관련된 서비스 주석  
-주석	설명
-beta.cloud.google.com/backend-config	이 주석을 사용하여 servicePort와 연결된 백엔드 서비스를 구성합니다. 자세한 내용은 인그레스 기능을 참조하세요.
-cloud.google.com/neg	이 주석을 사용하여 부하 분산기에서 네트워크 엔드포인트 그룹을 사용하도록 지정합니다. 컨테이너 기반 부하 분산 사용을 참조하세요.
+|주석|설명| 
+|주석	설명
+|beta.cloud.google.com/backend-config | 이 주석을 사용하여 servicePort와 연결된 백엔드 서비스를 구성합니다. </br> 자세한 내용은 인그레스 기능을 참조하세요. |  
+|cloud.google.com/neg | 이 주석을 사용하여 부하 분산기에서 네트워크 엔드포인트 그룹을 사용하도록 지정합니다. </br> 컨테이너 기반 부하 분산 사용을 참조하세요. |  
 
 
 #### Ingress 오류 조회  
