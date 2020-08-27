@@ -1,5 +1,20 @@
 # Prometheus
 
+### stable/prometheus-operator 설치  
+```
+taeeyoul@cloudshell:~/workspace/ttc-infra/prometheus-operator (ttc-team-14)$ helm install prometheus . -n ttc-infra -f values.yaml
+NAME: prometheus
+LAST DEPLOYED: Wed Aug 26 09:34:03 2020
+NAMESPACE: ttc-infra
+STATUS: deployed
+REVISION: 1
+NOTES:
+The Prometheus Operator has been installed. Check its status by running:
+  kubectl --namespace ttc-infra get pods -l "release=prometheus"
+Visit https://github.com/coreos/prometheus-operator for instructions on how
+to create & configure Alertmanager and Prometheus instances using the Operator.
+```
+
 ### Persistent Volume 생성  
 ####   
 ```

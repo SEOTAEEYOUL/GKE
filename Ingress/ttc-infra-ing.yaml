@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ttc-infra
+  namespace: ttc-infra
+  labels:
+    app.kubernetes.io/instance: ttc
+    app.kubernetes.io/managed-by: Helm
+    # app.kubernetes.io/name: grafana
+    # app.kubernetes.io/version: 7.0.3
+    # helm.sh/chart: grafana-5.3.0
+  annotations:
+    # ingress.kubernetes.io/backends: '{"k8s-be-32171--011a2b9a78e503d3":"HEALTHY","k8s-be-32695--011a2b9a78e503d3":"Unknown"}'
+    # ingress.kubernetes.io/forwarding-rule: k8s2-fr-crjzahb8-ttc-infra-ttc-grafana-w2xutc04
+    # ingress.kubernetes.io/target-proxy: k8s2-tp-crjzahb8-ttc-infra-ttc-grafana-w2xutc04
+    # ingress.kubernetes.io/url-map: k8s2-um-crjzahb8-ttc-infra-ttc-grafana-w2xutc04
+    meta.helm.sh/release-name: ttc
+    meta.helm.sh/release-namespace: ttc-infra
+  finalizers:
+  - networking.gke.io/ingress-finalizer-V2
+spec:
+  rules:
+  - host: grafana.team14.sk-ttc.com
+    http:
+      paths:
+      - backend:
+          serviceName: ttc-grafana
+          servicePort: 80
+        path: /*
+  - host: alertmanager.team14.sk-ttc.com
+    http:
+      paths:
+      - backend:
+          serviceName: ttc-prometheus-operator-alertmanager
+          servicePort: 9093
+        path: /*
+  - host: prometheus.team14.sk-ttc.com
+    http:
+      paths:
+      - backend:
+          serviceName: ttc-prometheus-operator-prometheus
+          servicePort: 9090
+        path: /*
