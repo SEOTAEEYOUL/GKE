@@ -359,6 +359,160 @@ spec:
       queryStringWhitelist: queryStringWhitelist
 ```
 
+
+#### project 정보 보기   
+```
+taeeyoul@cloudshell:~/workspace/storageclass (ttc-team-14)$ gcloud compute project-info describe --project ttc-team-14
+commonInstanceMetadata:
+  fingerprint: CnKkevO8fME=
+  items:
+  - key: gke-cluster-team14-cf7eb391-secondary-ranges
+    value: services:vpc-team14:az-a-pub1:gke-cluster-team14-services-cf7eb391,pods:vpc-team14:az-a-pub1:gke-cluster-team14-pods-cf7eb391
+  - key: sshKeys
+    value: |-
+      gke-cf7eb391bc03ba32d851:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKz66WCcL4RqJg2pkUhSYF6w/OdeJ4ilvrEq7ZYn5zCRExxhazaa+PndycHPd0gjKUxSU7uz1vI6uLQ2Y+hOpHQl2XgU1ek9QidZ8sDDWQQguidE0RGIktjVFEV+m+XxdWAHk3cm1glb8CdxjPrt8351cQvrplzGMmVHfZFreEx8U
+EpIvbR6socVQ2h/zkSnMUrCSwlqD+JRsfGG6BvLWzBe/uYeYCP/Z3WtVXuP7repRQwwC5y8J9xzNOC7IS9BIjkuRIE95y50OCriZsk6dLakjhez+hUR2y2MZ4JI5gTVuBd7FUFiON42RtxD+IKTgAVkNQdIq5OTmcAhBwFQql gke-cf7eb391bc03ba32d851@gke-cf7eb391bc03ba32d851
+      gke-cf7eb391bc03ba32d851:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCNfW2ucaYXfzmXN8T5KazWwX3dsxZCcoER0EJwU1NYqxnbpNZtc6mxJVhJ8dg0AUhH9vb1wsug0xzQ4qLpWwOLHF7iN/drN7V5OZzFjk0YiubjEm757OZydznreV3r2zFiugEXP1Us3anaiBdAQXa8intq7f6JKjBe6d37CH74JJ3
+aHBWHEBpovqkmf4Wak/Saz+dR6zvrOr5/ZZcgFiu/VuUBE8YXd4eELr2GsWngO9X9K5S4XE8/sC4NPmq4+xnVQEdzXayiZcskzasjA/ce+XKuh+Lh2sV49Md38b1C/GEtet+19nf/Izt7T/Ypizrw0IYHNPeJADrCv1hQMLl9 gke-cf7eb391bc03ba32d851@gke-cf7eb391bc03ba32d851
+      gke-cf7eb391bc03ba32d851:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDoS9Cq8CecC5YFZPuJ4sncCEPMHTJYQbU4ppR678H4R/MY5WooEsWo4nTdVvavjxFrZQv/jXLYZ0OP4wmVctFmWzbkI0SSMNGi5MQFWsTwwIP0mpX/WS0t7CdnspGNTEwq7DOiueFUpYV3luj/5tLIDY5S3Uug/LeQwzMitKTFUXF
+6De5b8P9QiuQZ64v1WHsQcRC+6ydhfMK5/y0l3o0Y6LZbV4NxBoFkrfC1KcPD+Q6o3jNHCCWHhomx5bvcKD5vuTFaT8xMLwBWg+JKUv9d4iBSzzZnGeKzg91X4JspHKtzCexrOSkoxtpmKQ+KVWb1/VyBmzWsNfT4Qneg/tX/ gke-cf7eb391bc03ba32d851@gke-cf7eb391bc03ba32d851
+  - key: ssh-keys
+    value: |
+      taeeyoul:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAH+2jnw8xSXOBsNh5Ro3QUFCb+Hn7OyWr6cV2yvtVE+Yw0YzVY1ruQF+aZTdVWN+cGyqpbMZaVBaNtVXlKAvvW/uS/JEkTuF8ZSJadT0QqZM5+tynCOzfY7VtdXFEYLFdgGKpC/4BVnF9Wr/NHVZfNzEPtSiQUI20l6UdA/UJcQWeAcsV9cvCl/sr9PEd3k
+J0TOESSCgq0YKOzKdT7k0wwWL7tMyEKAFQy1UopSKs5FUl9GQJ6biT2jbtlA0QXZf67l3DmE32gnKculneuwMNBAapQj0mDITMbtd1O2pWmhMeCnBMmvqTwRz4BCQt1uTMmp6cF19+l72dFqDV8pF708= google-ssh {"userName":"taeeyoul@gmail.com","expireOn":"2020-08-20T07:46:05+0000"}
+      taeeyoul:ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGtuFrUY7aJ66U8z7NjXMnCtrA3rhFX9Ta3o32mPEkSONANbjSR7S1VVvgEf/nTluLwzdl0FLC9BSQSh1MAdLlM= google-ssh {"userName":"taeeyoul@gmail.com","expireOn":"2020-08-20
+T07:46:04+0000"}
+      taeeyoul:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCe2O9hncN8zWP1ocVZ2i2cqBFOd/iKXrbZ/WauL9JxNsXUANGBlnqWaMLtAv7s57fXhoUaAhOPNZBrnN04fBrYx9j6IFskbHwcX2zV0GnDjoLpScHWh/xev8NhzEa009DTOetQjoSwn1113fNiH1WrbFJOyZET7/4IeTti6lhbmZ+gDBo/MR4UhJcB+N0
+PWvv5EdOCKI7H2jHSrKnH9ahWW/2T7W1Vs9i1HdwksWA8jYRAHfmGJerLf8vBmFPHzvAVB1/MtcrjOmFW92ZS4yj8zZLHKSArQG3MW2OGuKwkwjZW+ZNmGK0ZBuprLujZCHTtR2LhkyRiybK6HI4jT1Mv google-ssh {"userName":"taeeyoul@gmail.com","expireOn":"2020-08-20T07:45:11+0000"}
+      taeeyoul:ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNi90npVG9S6kKSDpuKoR1zB5Dbymy3A4Zp7ji0AiXYjy3t8x6GmRvDBtLWJSHntNXAqASLpI7xq86v9Rw0YmWQ= google-ssh {"userName":"taeeyoul@gmail.com","expireOn":"2020-08-20
+T07:45:10+0000"}
+      taeeyoul:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCe2O9hncN8zWP1ocVZ2i2cqBFOd/iKXrbZ/WauL9JxNsXUANGBlnqWaMLtAv7s57fXhoUaAhOPNZBrnN04fBrYx9j6IFskbHwcX2zV0GnDjoLpScHWh/xev8NhzEa009DTOetQjoSwn1113fNiH1WrbFJOyZET7/4IeTti6lhbmZ+gDBo/MR4UhJcB+N0
+PWvv5EdOCKI7H2jHSrKnH9ahWW/2T7W1Vs9i1HdwksWA8jYRAHfmGJerLf8vBmFPHzvAVB1/MtcrjOmFW92ZS4yj8zZLHKSArQG3MW2OGuKwkwjZW+ZNmGK0ZBuprLujZCHTtR2LhkyRiybK6HI4jT1Mv google-ssh {"userName":"taeeyoul@gmail.com","expireOn":"2020-08-20T07:44:39+0000"}
+      taeeyoul:ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNi90npVG9S6kKSDpuKoR1zB5Dbymy3A4Zp7ji0AiXYjy3t8x6GmRvDBtLWJSHntNXAqASLpI7xq86v9Rw0YmWQ= google-ssh {"userName":"taeeyoul@gmail.com","expireOn":"2020-08-20
+T07:44:36+0000"}
+  kind: compute#metadata
+creationTimestamp: '2020-08-13T23:18:10.240-07:00'
+defaultNetworkTier: PREMIUM
+defaultServiceAccount: 563465074075-compute@developer.gserviceaccount.com
+id: '4384854555588530765'
+kind: compute#project
+name: ttc-team-14
+quotas:
+- limit: 25000.0
+  metric: SNAPSHOTS
+  usage: 0.0
+- limit: 50.0
+  metric: NETWORKS
+  usage: 2.0
+- limit: 500.0
+  metric: FIREWALLS
+  usage: 8.0
+- limit: 10000.0
+  metric: IMAGES
+  usage: 0.0
+- limit: 700.0
+  metric: STATIC_ADDRESSES
+  usage: 3.0
+- limit: 500.0
+  metric: ROUTES
+  usage: 2.0
+- limit: 375.0
+  metric: FORWARDING_RULES
+  usage: 6.0
+- limit: 1250.0
+  metric: TARGET_POOLS
+  usage: 0.0
+- limit: 1250.0
+  metric: HEALTH_CHECKS
+  usage: 10.0
+- limit: 2300.0
+  metric: IN_USE_ADDRESSES
+  usage: 6.0
+- limit: 1250.0
+  metric: TARGET_INSTANCES
+  usage: 0.0
+- limit: 250.0
+  metric: TARGET_HTTP_PROXIES
+  usage: 5.0
+- limit: 250.0
+  metric: URL_MAPS
+  usage: 4.0
+- limit: 75.0
+  metric: BACKEND_SERVICES
+  usage: 10.0
+- limit: 2500.0
+  metric: INSTANCE_TEMPLATES
+  usage: 3.0
+- limit: 125.0
+  metric: TARGET_VPN_GATEWAYS
+  usage: 0.0
+- limit: 250.0
+  metric: VPN_TUNNELS
+  usage: 0.0
+- limit: 75.0
+  metric: BACKEND_BUCKETS
+  usage: 0.0
+- limit: 20.0
+  metric: ROUTERS
+  usage: 0.0
+- limit: 250.0
+  metric: TARGET_SSL_PROXIES
+  usage: 0.0
+- limit: 250.0
+  metric: TARGET_HTTPS_PROXIES
+  usage: 1.0
+- limit: 250.0
+  metric: SSL_CERTIFICATES
+  usage: 3.0
+- limit: 275.0
+  metric: SUBNETWORKS
+  usage: 25.0
+- limit: 250.0
+  metric: TARGET_TCP_PROXIES
+  usage: 0.0
+- limit: 10.0
+  metric: SECURITY_POLICIES
+  usage: 0.0
+- limit: 200.0
+  metric: SECURITY_POLICY_RULES
+  usage: 0.0
+- limit: 375.0
+  metric: PACKET_MIRRORINGS
+  usage: 0.0
+- limit: 2500.0
+  metric: NETWORK_ENDPOINT_GROUPS
+  usage: 0.0
+- limit: 6.0
+  metric: INTERCONNECTS
+  usage: 0.0
+- limit: 5000.0
+  metric: GLOBAL_INTERNAL_ADDRESSES
+  usage: 2.0
+- limit: 125.0
+  metric: VPN_GATEWAYS
+  usage: 0.0
+- limit: 10000.0
+  metric: MACHINE_IMAGES
+  usage: 0.0
+- limit: 20.0
+  metric: SECURITY_POLICY_CEVAL_RULES
+  usage: 0.0
+- limit: 125.0
+  metric: EXTERNAL_VPN_GATEWAYS
+  usage: 0.0
+- limit: 1.0
+  metric: PUBLIC_ADVERTISED_PREFIXES
+  usage: 0.0
+- limit: 10.0
+  metric: PUBLIC_DELEGATED_PREFIXES
+  usage: 0.0
+- limit: 1024.0
+  metric: STATIC_BYOIP_ADDRESSES
+  usage: 0.0
+selfLink: https://www.googleapis.com/compute/v1/projects/ttc-team-14
+xpnProjectStatus: UNSPECIFIED_XPN_PROJECT_STATUS
+```
+
   
 #### Cluster 삭제
 ```
