@@ -21,7 +21,8 @@ taeeyoul@cloudshell:~/workspace/storageclass (ttc-team-14)$ gcloud services enab
 Operation "operations/acf.61d4c240-643c-4c06-9b4e-3d75bc96f995" finished successfully
 ```
 
-#### Create a Cloud Filestore instance with 100GB of storage capacity  
+#### Create a Cloud Filestore instance with 1TB of storage capacity  
+- 주의 : 1TB 이하로는 만들어 지지 않음 
 ```
 ORG=[YOUR_ORG]
 BILLING_ACCOUNT=[YOUR_BILLING_ACCOUNT_NAME]
