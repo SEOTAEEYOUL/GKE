@@ -126,3 +126,49 @@ taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud container clusters list
 NAME            LOCATION         MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION   NUM_NODES  STATUS
 cluster-team14  asia-northeast3  1.16.13-gke.1   34.64.109.235  e2-standard-2  1.16.13-gke.1  3          RUNNING
 ```
+
+#### Redis   Count  
+```
+taeeyoul@cloudshell:~/workspace/app/redis (ttc-team-14)$ ka exec redis-master-0 -c redis -it bash
+I have no name!@redis-master-0:/$ redis-cli -a ttc2020!
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+127.0.0.1:6379> info keyspace
+# Keyspace
+db0:keys=1542,expires=146,avg_ttl=274258985
+127.0.0.1:6379> info cluster
+# Cluster
+cluster_enabled:0
+127.0.0.1:6379> info clients
+# Clients
+connected_clients:7
+client_recent_max_input_buffer:124440
+client_recent_max_output_buffer:0
+blocked_clients:0
+tracking_clients:0
+clients_in_timeout_table:0
+127.0.0.1:6379> info Server
+# Server
+redis_version:6.0.6
+redis_git_sha1:00000000
+redis_git_dirty:0
+redis_build_id:3d86d7b63053cc40
+redis_mode:standalone
+os:Linux 4.19.112+ x86_64
+arch_bits:64
+multiplexing_api:epoll
+atomicvar_api:atomic-builtin
+gcc_version:8.3.0
+process_id:1
+run_id:683a2038230f0e5485e2db4ad9c3b41e154d8dec
+tcp_port:6379
+uptime_in_seconds:89523
+uptime_in_days:1
+hz:10
+configured_hz:10
+lru_clock:4769453
+executable:/redis-server
+config_file:/opt/bitnami/redis/etc/redis.conf
+127.0.0.1:6379> quit
+I have no name!@redis-master-0:/$
+```
+
