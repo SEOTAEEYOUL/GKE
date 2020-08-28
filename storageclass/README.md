@@ -1,5 +1,75 @@
 # StorageClass
 
+#### PersistentVolume이 지원하는 액세스 모드
+| 모드| 설명|
+| --- |:--- |
+| ReadWriteOnce | 볼륨은 단일 노드에 의한 읽기-쓰기로 마운트될 수 있습니다. |
+| ReadOnlyMany | 볼륨은 여러 노드에 의한 읽기 전용으로 마운트될 수 있습니다. |
+| ReadWriteMany | 볼륨은 여러 노드에 의한 읽기-쓰기로 마운트될 수 있습니다. </br> Compute Engine 영구 디스크에서 지원하는 PersistentVolume은 이 액세스 모드를 지원하지 않습니다. |
+
+### 영역설정
+```
+taeeyoul@cloudshell:~/workspace/storageclass (ttc-team-14)$ gcloud config set compute/zone asia-northeast3
+Updated property [compute/zone].
+```  
+
+### Create a Cloud Filestore volume  
+
+#### Enable the required Google APIs
+```
+taeeyoul@cloudshell:~/workspace/storageclass (ttc-team-14)$ gcloud services enable file.googleapis.com
+Operation "operations/acf.61d4c240-643c-4c06-9b4e-3d75bc96f995" finished successfully
+```
+
+#### Create a Cloud Filestore instance with 100GB of storage capacity  
+```
+ORG=[YOUR_ORG]
+BILLING_ACCOUNT=[YOUR_BILLING_ACCOUNT_NAME]
+PROJECT="TTC-Team-14"
+ZONE="asia-northeast3"
+FS="ttc-fs"
+gcloud beta filestore instances create ${FS} \
+    --project=${PROJECT} \
+    --zone=${ZONE} \
+    --tier=STANDARD \
+    --file-share=name="volumes",capacity=100GB \
+    --network=name="default"
+```
+
+#### Retrieve the IP address of the Cloud Filestore instance  
+```
+FSADDR=$(gcloud beta filestore instances describe ${FS} \
+     --project=${PROJECT} \
+     --zone=${ZONE} \
+     --format="value(networks.ipAddresses[0])")
+```
+
+#### Deploy the NFS-Client Provisioner
+```
+helm install stable/nfs-client-provisioner --name ttc-infra --set nfs.server=${FSADDR} --set nfs.path=/volumes
+watch kubectl get po -l app=nfs-client-provisioner
+```
+
+#### Make a Persistent Volume Claim  
+```
+helm install --name postgresql --set persistence.storageClass=nfs-client stable/postgresql
+watch kubectl get po -l app=postgresql
+```
+
+### NFS Storage  
+#### GCP Persistent Disk 프로비저닝  
+```
+gcloud compute disks create --size=2GB --zone=asia-northeast3 nfs-disk
+```
+  
+#### GKE에서 NFS 서버 설정  
+```
+gcloud container clusters get-credentials cluster-team14 —zone asia-northeast3 —project TTC-Team-14
+kubectl create -f nfs-server-deplo.yaml
+kubectl create -f nfs-clusterip-svc.yaml
+kubectl create -f nfs-pv-pvc.yaml
+```
+
 
 ### Regional Storage Class 생성  
 #### manifest file  

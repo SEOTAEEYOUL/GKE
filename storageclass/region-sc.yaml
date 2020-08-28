@@ -1,0 +1,20 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  name: ttc-sc
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  replication-type: regional-pd
+# volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
+reclaimPolicy: Delete
+allowedTopologies:
+- matchLabelExpressions:
+  - key: failure-domain.beta.kubernetes.io/zone
+    values:
+    - asia-northeast3-a
+    - asia-northeast3-b
+    - asia-northeast3-c
