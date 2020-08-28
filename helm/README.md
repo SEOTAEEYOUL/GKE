@@ -38,4 +38,8 @@ NAME            URL
 stable          https://kubernetes-charts.storage.googleapis.com/
 bitnami         https://charts.bitnami.com/bitnami
 incubator       https://kubernetes-charts-incubator.storage.googleapis.com
+keyporttech     https://keyporttech.github.io/helm-charts/
+argo            https://argoproj.github.io/argo-helm
+codecentric     https://codecentric.github.io/helm-charts
+harbor          https://helm.goharbor.io
 ```

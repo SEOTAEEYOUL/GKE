@@ -2,28 +2,9 @@
 
 ## ttc-app 배포하기  
 ```
-taeeyoul@cloudshell:~/workspace/tcc-app/redis-ha (ttc-team-14)$ helm install redis-ha . -n ttc-app -f values.yaml
-NAME: redis-ha
-LAST DEPLOYED: Wed Aug 26 00:07:55 2020
-NAMESPACE: ttc-app
-STATUS: deployed
-REVISION: 1
-NOTES:
-Redis can be accessed via port 6379 and Sentinel can be accessed via port 26379 on the following DNS name from within your cluster:
-redis-ha.ttc-app.svc.cluster.local
-To connect to your Redis server:
-1. Run a Redis pod that you can use as a client:
-   kubectl exec -it redis-ha-server-0 sh -n ttc-app
-2. Connect using the Redis CLI:
-  redis-cli -h redis-ha.ttc-app.svc.cluster.local
-taeeyoul@cloudshell:~/workspace/tcc-app/redis-ha (ttc-team-14)$ pwd
-/home/taeeyoul/workspace/tcc-app/redis-ha
-```
-
-```
 taeeyoul@cloudshell:~/workspace/ttc-app/redis (ttc-team-14)$ helm install redis . -n ttc-app -f values.yaml
 NAME: redis
-LAST DEPLOYED: Wed Aug 26 02:46:22 2020
+LAST DEPLOYED: Thu Aug 27 08:04:05 2020
 NAMESPACE: ttc-app
 STATUS: deployed
 REVISION: 1
@@ -46,8 +27,27 @@ To connect to your Redis server:
 To connect to your database from outside the cluster execute the following commands:
     kubectl port-forward --namespace ttc-app svc/redis-master 6379:6379 &
     redis-cli -h 127.0.0.1 -p 6379 -a $REDIS_PASSWORD
-taeeyoul@cloudshell:~/workspace/ttc-app/redis (ttc-team-14)$
+```  
+  
 ```
+taeeyoul@cloudshell:~/workspace/tcc-app/redis-ha (ttc-team-14)$ helm install redis-ha . -n ttc-app -f values.yaml
+NAME: redis-ha
+LAST DEPLOYED: Wed Aug 26 00:07:55 2020
+NAMESPACE: ttc-app
+STATUS: deployed
+REVISION: 1
+NOTES:
+Redis can be accessed via port 6379 and Sentinel can be accessed via port 26379 on the following DNS name from within your cluster:
+redis-ha.ttc-app.svc.cluster.local
+To connect to your Redis server:
+1. Run a Redis pod that you can use as a client:
+   kubectl exec -it redis-ha-server-0 sh -n ttc-app
+2. Connect using the Redis CLI:
+  redis-cli -h redis-ha.ttc-app.svc.cluster.local
+taeeyoul@cloudshell:~/workspace/tcc-app/redis-ha (ttc-team-14)$ pwd
+/home/taeeyoul/workspace/tcc-app/redis-ha
+```
+
 
 #### 배포된 Pod 확인  
 ```
