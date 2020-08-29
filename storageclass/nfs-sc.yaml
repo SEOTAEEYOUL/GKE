@@ -1,0 +1,21 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-sc
+  annotations:
+    meta.helm.sh/release-name: nfs-cp
+    meta.helm.sh/release-namespace: ttc-infra
+    storageclass.kubernetes.io/is-default-class: "true"
+  labels:
+    app: nfs-client-provisioner
+    app.kubernetes.io/managed-by: Helm
+    chart: nfs-client-provisioner-1.2.9
+    heritage: Helm
+    release: nfs-cp
+parameters:
+  archiveOnDelete: "true"
+provisioner: cluster.local/nfs-cp-nfs-client-provisioner
+# reclaimPolicy: Delete
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: Immediate

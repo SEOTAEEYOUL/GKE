@@ -15,14 +15,54 @@
     * gcloud 도구는 Google Cloud의 기본 명령줄 인터페이스를 제공
     * kubectl은 Kubernetes 클러스터를 대상으로 명령어를 실행할 수 있는 기본 명령줄 인터페이스
 
+  
+#### 최신 버전의 Cloud SDK Update  
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud components update
+To help improve the quality of this product, we collect anonymized
+usage data
+and anonymized stacktraces when crashes are encountered; additional
+information
+is available at <https://cloud.google.com/sdk/usage-statistics>. This
+data is
+handled in accordance with our privacy policy
+<https://policies.google.com/privacy>. You may choose to opt in this
+collection now (by choosing 'Y' at the below prompt), or at any time
+in the
+future by running the following command:
+    gcloud config set disable_usage_reporting false
+Do you want to opt-in (y/N)?  y
+ERROR: (gcloud.components.update)
+You cannot perform this action because the Cloud SDK component manager
+is disabled for this installation. You can run the following command
+to achieve the same result for this installation:
+sudo apt-get update && sudo apt-get --only-upgrade install google-cloud-sdk-anthos-auth google-cloud-sdk-firestore-emulator google-cloud-sdk-minikube google-cloud-sdk-datastore-emulator google-cloud-sdk-skaffold google-cloud-sdk-kind google-c
+loud-sdk-app-engine-grpc google-cloud-sdk-kpt google-cloud-sdk-cloud-build-local google-cloud-sdk-pubsub-emulator google-cloud-sdk-app-engine-python kubectl google-cloud-sdk-bigtable-emulator google-cloud-sdk google-cloud-sdk-spanner-emulator
+ google-cloud-sdk-cbt google-cloud-sdk-app-engine-go google-cloud-sdk-app-engine-python-extras google-cloud-sdk-app-engine-java google-cloud-sdk-datalab
+
+taeeyoul@cloudshell:~ (ttc-team-14)$
+```
+
+#### 서비스 계정이 인증된 활성 계정인지 확인
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud auth list
+  Credentialed Accounts
+ACTIVE  ACCOUNT
+*       taeeyoul@gmail.com
+To set the active account, run:
+    $ gcloud config set account `ACCOUNT`
+```
+
 #### 기본 프로젝트 설정
 ```
 gcloud config set project project-id
+gcloud config set project ttc-team-14
 ```
 
 #### 기본 컴퓨팅 영역 설정
 ```
 gcloud config set compute/zone compute-zone
+gcloud config set compute/zone asia-northeast3-a 
 ```
 
 ```
