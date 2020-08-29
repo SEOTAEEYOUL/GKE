@@ -63,7 +63,8 @@ define( 'DB_COLLATE', '' );
 rm /var/www/html/index.html
 rsync -avP ~/wordpress/ /var/www/html/
 ```
-  
+
+---    
   
 ```
 [tyseo@ip-192-168-2-94 wordpress]$ wget https://wordpress.org/latest.tar.gz
