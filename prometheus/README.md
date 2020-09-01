@@ -1,4 +1,9 @@
-# Prometheus
+# Prometheus-operator
+
+### Link
+* [prometheus-operator](https://coreos.com/blog/the-prometheus-operator.html)
+
+![prometheus-operator](https://coreos.com/sites/default/files/inline-images/p1.png)
 
 ### stable/prometheus-operator 설치  
 ```

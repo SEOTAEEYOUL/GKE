@@ -1,6 +1,8 @@
 # Redis
 
 ## ttc-app 배포하기  
+
+#### 설치 명령
 ```
 taeeyoul@cloudshell:~/workspace/ttc-app/redis (ttc-team-14)$ helm install redis . -n ttc-app -f values.yaml
 NAME: redis
