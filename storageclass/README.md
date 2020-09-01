@@ -8,6 +8,11 @@
 | ReadWriteMany | 볼륨은 여러 노드에 의한 읽기-쓰기로 마운트될 수 있습니다. </br> Compute Engine 영구 디스크에서 지원하는 PersistentVolume은 이 액세스 모드를 지원하지 않습니다. |
 
 - ReadWriteMany 모드를 사용하기 위해 NFS Type 의 StorageClass 를 추가함
+  
+---  
+  
+
+## NFS Client Provisioner
 
 ### 영역설정
 ```
@@ -391,9 +396,11 @@ kubectl create -f nfs-server-deplo.yaml
 kubectl create -f nfs-clusterip-svc.yaml
 kubectl create -f nfs-pv-pvc.yaml
 ```
+  
+---  
+  
 
-
-### Regional Storage Class 생성  
+## Regional Storage Class 생성  
 #### manifest file  
 ```
 taeeyoul@cloudshell:~/workspace/storageclass (ttc-team-14)$ cat region-sc.yaml
