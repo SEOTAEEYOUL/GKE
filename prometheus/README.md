@@ -1,7 +1,8 @@
 # Prometheus-operator
 
 ### Link
-* [prometheus-operator](https://coreos.com/blog/the-prometheus-operator.html)
+* [prometheus-operator](https://coreos.com/blog/the-prometheus-operator.html)  
+* [prometheus-operator - getting-started](https://coreos.com/operators/prometheus/docs/latest/user-guides/getting-started.html)  
 
 ![prometheus-operator](https://coreos.com/sites/default/files/inline-images/p1.png)
 

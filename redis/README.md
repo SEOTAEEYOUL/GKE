@@ -1,6 +1,20 @@
 # Redis
 
-## ttc-app 배포하기  
+### Redis Service 변경  
+- redis service 가 master 만 바라 보도록 수정  
+```
+taeeyoul@cloudshell:~/workspace/ttc-app/redis$ ka get pod -o wide -lrole=master
+NAME             READY   STATUS    RESTARTS   AGE   IP             NODE                                           NOMINATED NODE   READINESS GATES
+redis-master-0   3/3     Running   0          19h   192.168.2.10   gke-cluster-team14-worker-pool-4ba9331e-3tn1   <none>           <none>
+taeeyoul@cloudshell:~/workspace/ttc-app/redis$ ka get svc,ep redis
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)              AGE
+service/redis   ClusterIP   172.16.214.64   <none>        6379/TCP,26379/TCP   4d22h
+NAME              ENDPOINTS                              AGE
+endpoints/redis   192.168.2.10:26379,192.168.2.10:6379   4d22h
+```
+
+### ttc-app 배포하기  
+- pvc 없이 사용하도록 배포함  
 
 #### 설치 명령
 ```
