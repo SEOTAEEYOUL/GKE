@@ -3,6 +3,11 @@
 Link
 [Jenkins Kubernetes Plugin](https://plugins.jenkins.io/kubernetes/)
 [Slack Jenkins CI](https://sk-tcl.slack.com/services/B019UNHMDFC?added=1)
+[Slack Notification](https://plugins.jenkins.io/slack/)
+[Jenkins를 사용하여 Google Kubernetes Engine에 지속적으로 배포](https://cloud.google.com/solutions/continuous-delivery-jenkins-kubernetes-engine?hl=ko)
+[How to Push Docker Image to Google Container Registry (GCR) through Jenkins Job](https://medium.com/google-cloud/how-to-push-docker-image-to-google-container-registry-gcr-through-jenkins-job-52b9d5ce9f7f)
+
+![Jenkins Pipeline](https://cloud.google.com/solutions/images/jenkins-cd-container-engine.svg?hl=ko)
 
 ### Install  
 #### Search  
@@ -60,3 +65,42 @@ jenkins/README.md
     - git:4.2.2
     - configuration-as-code:1.41
 ```
+
+### Helm 배포
+```
+taeeyoul@cloudshell:~/workspace/ttc-infra/jenkins/jenkins (ttc-team-14)$ helm install jenkins . -n ttc-infra -f values.yaml
+NAME: jenkins
+LAST DEPLOYED: Wed Sep  2 03:03:21 2020
+NAMESPACE: ttc-infra
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get your 'admin' user password by running:
+  printf $(kubectl get secret --namespace ttc-infra jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+2. Get the Jenkins URL to visit by running these commands in the same shell:
+  export POD_NAME=$(kubectl get pods --namespace ttc-infra -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=jenkins" -o jsonpath="{.items[0].metadata.name}")
+  echo http://127.0.0.1:8080
+  kubectl --namespace ttc-infra port-forward $POD_NAME 8080:8080
+3. Login with the password from step 1 and the username: admin
+4. Use Jenkins Configuration as Code by specifying configScripts in your values.yaml file, see documentation: http:///configuration-as-code and examples: https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos
+For more information on running Jenkins on Kubernetes, visit:
+https://cloud.google.com/solutions/jenkins-on-container-engine
+For more information about Jenkins Configuration as Code, visit:
+https://jenkins.io/projects/jcasc/
+taeeyoul@cloudshell:~/workspace/ttc-infra/jenkins/jenkins (ttc-team-14)$
+```
+
+
+#### GCR 배포를 위한 Jenkins Plugin  
+1) Install required Jenkins Plugins  
+```
+Google OAuth Credentials Plugin
+Docker Pipeline Plugin
+Google Container Registry Auth Plugin
+```
+
+2) Create a service account.  
+
+
+3) Add Global Credential 
+Jenkins -> Credentials -> Global Credentials -> Add Credentials

@@ -53,6 +53,30 @@ To set the active account, run:
     $ gcloud config set account `ACCOUNT`
 ```
 
+
+#### GKE 인증정보받기
+```
+taeeyoul@bastion-1:~$ gcloud container clusters get-credentials cluster-team14 --region asia-northeast3
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for cluster-team14.
+taeeyoul@bastion-1:~$ kubectl get node
+NAME                                           STATUS   ROLES    AGE     VERSION
+gke-cluster-team14-worker-pool-7a95e758-vsb9   Ready    <none>   99m     v1.16.13-gke.1
+gke-cluster-team14-worker-pool-b758b7c5-p9mv   Ready    <none>   99m     v1.16.13-gke.1
+gke-cluster-team14-worker-pool-fee3fe68-tqs0   Ready    <none>   5h59m   v1.16.13-gke.1
+taeeyoul@bastion-1:~$ kubectl -n ttc-infra get pod
+NAME                                             READY   STATUS    RESTARTS   AGE
+grafana-5c48b9bc97-dkwz7                         2/2     Running   0          132m
+nfs-cp-nfs-client-provisioner-6b69b4d57c-255jg   1/1     Running   0          132m
+prometheus-alertmanager-684f649ddb-mr58n         2/2     Running   0          100m
+prometheus-kube-state-metrics-6df5d44568-t2tts   1/1     Running   0          132m
+prometheus-node-exporter-5s8wg                   1/1     Running   0          100m
+prometheus-node-exporter-ks88k                   1/1     Running   0          100m
+prometheus-node-exporter-xbzkz                   1/1     Running   0          4h48m
+prometheus-pushgateway-549d8d756c-4bxcr          1/1     Running   0          132m
+prometheus-server-fd5699c77-djgcv                2/2     Running   0          100m
+```
+
 #### 기본 프로젝트 설정
 ```
 gcloud config set project project-id

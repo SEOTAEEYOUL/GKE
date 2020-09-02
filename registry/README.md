@@ -40,6 +40,16 @@ Adding credentials for all GCR repositories.
 WARNING: A long list of credential helpers may cause delays running 'docker build'. We recommend passing the registry name to configure only the registry you are using.
 gcloud credential helpers already registered correctly.
 taeeyoul@cloudshell:~ (ttc-team-14)$
+
+taeeyoul@cloudshell:~/workspace/app/nodejs-bot (ttc-team-14)$ docker-credential-gcloud list
+{
+  "https://asia.gcr.io": "_dcgcloud_token",
+  "https://eu.gcr.io": "_dcgcloud_token",
+  "https://gcr.io": "_dcgcloud_token",
+  "https://marketplace.gcr.io": "_dcgcloud_token",
+  "https://staging-k8s.gcr.io": "_dcgcloud_token",
+  "https://us.gcr.io": "_dcgcloud_token"
+}
 ```
 
 #### 레지스트리 이름으로 이미지에 태그 지정  
@@ -140,4 +150,161 @@ docker pull gcr.io/[PROJECT-ID]/quickstart-image:tag1
 #### 삭제
 ```
 gcloud container images delete gcr.io/[PROJECT-ID]/quickstart-image:tag1 --force-delete-tags
+```
+
+---  
+  
+
+#### Cluster 정보 보기  
+```
+taeeyoul@cloudshell:~/workspace/app/nodejs-bot (ttc-team-14)$ gcloud container clusters describe cluster-team14 --resion asia-northeast3
+ERROR: (gcloud.container.clusters.describe) unrecognized arguments:
+  --resion (did you mean '--region'?)
+  asia-northeast3
+  To search the help text of gcloud commands, run:
+  gcloud help -- SEARCH_TERMS
+taeeyoul@cloudshell:~/workspace/app/nodejs-bot (ttc-team-14)$ gcloud container clusters describe cluster-team14 --region asia-northeast3
+addonsConfig:
+  dnsCacheConfig: {}
+  horizontalPodAutoscaling: {}
+  httpLoadBalancing: {}
+  kubernetesDashboard:
+    disabled: true
+  networkPolicyConfig:
+    disabled: true
+authenticatorGroupsConfig: {}
+autoscaling: {}
+clusterIpv4Cidr: 192.168.0.0/16
+createTime: '2020-08-20T07:35:40+00:00'
+currentMasterVersion: 1.16.13-gke.1
+currentNodeCount: 3
+currentNodeVersion: 1.16.13-gke.1
+databaseEncryption:
+  state: DECRYPTED
+defaultMaxPodsConstraint:
+  maxPodsPerNode: '110'
+description: TTC-Team-14
+endpoint: 34.64.109.235
+initialClusterVersion: 1.16.13-gke.1
+instanceGroupUrls:
+- https://www.googleapis.com/compute/v1/projects/ttc-team-14/zones/asia-northeast3-a/instanceGroupManagers/gke-cluster-team14-worker-pool-b758b7c5-grp
+- https://www.googleapis.com/compute/v1/projects/ttc-team-14/zones/asia-northeast3-b/instanceGroupManagers/gke-cluster-team14-worker-pool-4ba9331e-grp
+- https://www.googleapis.com/compute/v1/projects/ttc-team-14/zones/asia-northeast3-c/instanceGroupManagers/gke-cluster-team14-worker-pool-fee3fe68-grp
+icpAlloationPolicy:
+  clusterIpv4Cidr: 192.168.0.0/16
+  clusterIpv4CidrBlock: 192.168.0.0/16
+  clusterSecondaryRangeName: gke-cluster-team14-pods-cf7eb391
+  servicesIpv4Cidr: 172.16.0.0/16
+  servicesIpv4CidrBlock: 172.16.0.0/16
+  servicesSecondaryRangeName: gke-cluster-team14-services-cf7eb391
+  useIpAliases: true
+labelFingerprint: dd808d82
+legacyAbac: {}
+location: asia-northeast3
+locations:
+- asia-northeast3-a
+- asia-northeast3-b
+- asia-northeast3-c
+loggingService: logging.googleapis.com/kubernetes
+maintenancePolicy:
+  resourceVersion: e3b0c442
+masterAuth:
+  clusterCaCertificate: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURLekNDQWhPZ0F3SUJBZ0lSQU9XeGo2YjNDd0hpdWsrZml2RTBtc0V3RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa05HTmhOekF3TWpJdFl6QTFPUzAwWW1VMExUZ3pOamN0T1Rsa1lqTXpPRGd6TXpWawpNQjRYRF
+RJd01EZ3lNREEyTXpVME1Wb1hEVEkxTURneE9UQTNNelUwTVZvd0x6RXRNQ3NHQTFVRUF4TWtOR05oCk56QXdNakl0WXpBMU9TMDBZbVUwTFRnek5qY3RPVGxrWWpNek9EZ3pNelZrTUlJQklqQU5CZ2txaGtpRzl3MEIKQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBeHllUjZwVjJZS0VvQTlqM1Q3WDQ1T3VvOFE5Z0lGVm1S
+ejhacmpYZQpDU3JJT2NIQXVZeGhxaFR0N1AzcWtXeFJxMVNwQi9QTjI0OFo2NGl0aGYrNUxYL1dJV1FxWUIvMm9HanFCMUEyCm1QL1VJMGo4MW5UWTlxbkZYMmhqYktLWDRvZ2EwSW5qbEtkUG12T3N1djdqQVRMWXVxMFdZSHJjdUJMU0pxdnoKcm82MUNiSWo5S3pvMXRnSGdUZGdsOG1pTVVaNjU2cms0MFhrRWE0Y29KWG
+dLMWNSdjFCR0YvcDNEVUp0T0FndApzckZ1YmlEY0hPMkl1UFJxZVFvalUxQjRzblNxUUcwWXlHN3JXNFp6UTdCNVhiOThVdkhYRFhIY252dWpUdVA5CllVTTMrcXplZ1RLL1NQcjZlTWtYalJqbkNiQWhwcHhBZnpSQ201bVViWTArU3dJREFRQUJvMEl3UURBT0JnTlYKSFE4QkFmOEVCQU1DQWdRd0R3WURWUjBUQVFIL0JB
+VXdBd0VCL3pBZEJnTlZIUTRFRmdRVXdVSkVEQWg2WFN3SgpRbWt2TmRHRW5PaXRTblV3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUFqeWNlVHF4M0dHcVhJZDA1YlBQN3FRCmNqaVdPU09QUkMxdWZiVGtPbUhHbHhyVEtJN2NsVWpWRmFOaTdpTEZrNUJCb0tDSDNwQ1pBNkFhUEQyNkJOaEoKN3lBSElEQXc3SW15WnFPdV
+JhYUh6STJhdU1CUjNwTFpTZXg5TFZwRHpuNk85cTZHWFpra24yOXlqK0lybzR2ZQpIR2ZjcEYxV2pkbkV4cDBUZ2xnQWJYRDdpdGhwTjAvUGFiYXlIYk13ZUlJdkhqVlU5VW95cGg5bTZIaXovcVNtCi9RbGV0b1VHNTdkc2R5YVZyVHZNdFhmaGdjNmIwUko0OFBieXRYK2JYUTZqeEs1MGcyeHhETms0Z0NuVGFOWHYKTGM0
+UEdkcHlsTUhsK0Y3VFV2cmZRcFJSYzlkRE9sRzBGVnF4bHJ1TSsyRmM2NUhiRHpka2JDWlpiVG5vWG44PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+masterAuthorizedNetworksConfig: {}
+monitoringService: monitoring.googleapis.com/kubernetes
+name: cluster-team14
+network: vpc-team14
+networkConfig:
+  defaultSnatStatus: {}
+  enableIntraNodeVisibility: true
+  network: projects/ttc-team-14/global/networks/vpc-team14
+  subnetwork: projects/ttc-team-14/regions/asia-northeast3/subnetworks/az-a-pub1
+networkPolicy: {}
+nodeConfig:
+  diskSizeGb: 30
+  diskType: pd-standard
+  imageType: COS
+  labels:
+    role: worker
+  machineType: e2-standard-2
+  metadata:
+    disable-legacy-endpoints: 'true'
+  oauthScopes:
+  - https://www.googleapis.com/auth/devstorage.read_only
+  - https://www.googleapis.com/auth/logging.write
+  - https://www.googleapis.com/auth/monitoring
+  - https://www.googleapis.com/auth/servicecontrol
+  - https://www.googleapis.com/auth/service.management.readonly
+  - https://www.googleapis.com/auth/trace.append
+  serviceAccount: default
+  shieldedInstanceConfig:
+    enableIntegrityMonitoring: true
+  workloadMetadataConfig:
+    mode: GKE_METADATA
+nodePools:
+- autoscaling:
+    enabled: true
+    maxNodeCount: 3
+    minNodeCount: 1
+  config:
+    diskSizeGb: 30
+    diskType: pd-standard
+    imageType: COS
+    labels:
+      role: worker
+    machineType: e2-standard-2
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/trace.append
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  initialNodeCount: 1
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/ttc-team-14/zones/asia-northeast3-a/instanceGroupManagers/gke-cluster-team14-worker-pool-b758b7c5-grp
+  - https://www.googleapis.com/compute/v1/projects/ttc-team-14/zones/asia-northeast3-b/instanceGroupManagers/gke-cluster-team14-worker-pool-4ba9331e-grp
+  - https://www.googleapis.com/compute/v1/projects/ttc-team-14/zones/asia-northeast3-c/instanceGroupManagers/gke-cluster-team14-worker-pool-fee3fe68-grp
+  locations:
+  - asia-northeast3-a
+  - asia-northeast3-b
+  - asia-northeast3-c
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '110'
+  name: worker-pool
+  podIpv4CidrSize: 24
+  selfLink: https://container.googleapis.com/v1/projects/ttc-team-14/locations/asia-northeast3/clusters/cluster-team14/nodePools/worker-pool
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+  version: 1.16.13-gke.1
+releaseChannel:
+  channel: REGULAR
+resourceLabels:
+  role: worker
+selfLink: https://container.googleapis.com/v1/projects/ttc-team-14/locations/asia-northeast3/clusters/cluster-team14
+servicesIpv4Cidr: 172.16.0.0/16
+shieldedNodes: {}
+status: RUNNING
+subnetwork: az-a-pub1
+workloadIdentityConfig:
+  workloadPool: ttc-team-14.svc.id.goog
+zone: asia-northeast3
+taeeyoul@cloudshell:~/workspace/app/nodejs-bot (ttc-team-14)$
 ```
