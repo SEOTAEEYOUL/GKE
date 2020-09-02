@@ -15,7 +15,6 @@
     * gcloud 도구는 Google Cloud의 기본 명령줄 인터페이스를 제공
     * kubectl은 Kubernetes 클러스터를 대상으로 명령어를 실행할 수 있는 기본 명령줄 인터페이스
 
-  
 #### 최신 버전의 Cloud SDK Update  
 ```
 taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud components update
@@ -75,6 +74,24 @@ prometheus-node-exporter-ks88k                   1/1     Running   0          10
 prometheus-node-exporter-xbzkz                   1/1     Running   0          4h48m
 prometheus-pushgateway-549d8d756c-4bxcr          1/1     Running   0          132m
 prometheus-server-fd5699c77-djgcv                2/2     Running   0          100m
+```
+
+#### Timezone 변경  
+
+```
+taeeyoul@bastion-1:~$ date
+Wed Sep  2 11:55:34 UTC 2020
+taeeyoul@bastion-1:~$ 
+taeeyoul@bastion-1:~$ 
+taeeyoul@bastion-1:~$ sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+taeeyoul@bastion-1:~$ ls -lt
+total 0
+taeeyoul@bastion-1:~$ 
+taeeyoul@bastion-1:~$ 
+taeeyoul@bastion-1:~$ 
+taeeyoul@bastion-1:~$ 
+taeeyoul@bastion-1:~$ date
+Wed Sep  2 20:56:18 KST 2020
 ```
 
 #### 기본 프로젝트 설정
