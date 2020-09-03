@@ -15,6 +15,13 @@
     * gcloud 도구는 Google Cloud의 기본 명령줄 인터페이스를 제공
     * kubectl은 Kubernetes 클러스터를 대상으로 명령어를 실행할 수 있는 기본 명령줄 인터페이스
 
+#### Cloud 접속시 화면 
+```
+taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud container clusters get-credentials cluster-team14 --region asia-northeast3 --project ttc-team-14rs get-credentials cluster-team14 --region asia-northeas
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for cluster-team14.
+```
+
 #### 최신 버전의 Cloud SDK Update  
 ```
 taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud components update
