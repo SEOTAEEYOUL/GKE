@@ -98,21 +98,18 @@ https://jenkins.io/projects/jcasc/
 taeeyoul@cloudshell:~/workspace/ttc-infra/jenkins/jenkins (ttc-team-14)$
 ```
 
+---
 
-#### GCR 배포를 위한 Jenkins Plugin  
-1) Install required Jenkins Plugins  
-```
-Google OAuth Credentials Plugin
-Docker Pipeline Plugin
-Google Container Registry Auth Plugin
-```
 
-2) Create a service account.  
-- 서비스 계정 추가 및 권한 추가
+#### GCR 배포를 위한 Jenkinsfile 에서 docker login 추가하는 절차  
+- 현재 access token 방식은 1 시간 유효 이므로, 매 배포시 만들어 넣어 주어야 함  
+   
+1) 서비스 계정 추가 및 권한 추가
+- 부여할 권한
 > 스토리자 관리자
 > 스토리지 객체 뷰어
 
-- 서비스 계정의 Key 를 Json 형태로 받음  
+2) 서비스 계정의 Key 를 Json 형태로 받음  
 
 - Cloud SDK 서비스 계정 Login 하기  
 > gcloud auth activate-service-account ACCOUNT --key-file=KEY-FILE
