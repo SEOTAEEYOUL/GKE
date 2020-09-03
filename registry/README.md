@@ -66,6 +66,53 @@ docker tag quickstart-image gcr.io/$PROJECT-ID/quickstart-image:tag1
 docker push gcr.io/$PROJECT-ID$/quickstart-image:tag1
 ```
 
+#### Docker 이미지 조회  
+```
+taeeyoul@bastion-1:~$ gcloud container images list-tags gcr.io/ttc-team-14/nodejs-bot
+DIGEST        TAGS   TIMESTAMP
+238748ed8324  1.0.5  2020-08-31T13:49:01
+taeeyoul@bastion-1:~$ gcloud container images list-tags asia.gcr.io/ttc-team-14/nodejs-bot
+DIGEST        TAGS   TIMESTAMP
+d8184d0e330c  1.0.5  2020-08-31T14:08:27
+238748ed8324         2020-08-31T13:49:01
+taeeyoul@bastion-1:~$ 
+```
+
+#### Access 권한 확인
+```
+taeeyoul@bastion-1:~$ gcloud auth configure-docker
+WARNING: `docker` not in system PATH.
+`docker` and `docker-credential-gcloud` need to be in the same PATH in order to work correctly together.
+gcloud's Docker credential helper can be configured but it will not work until this is corrected.
+Adding credentials for all GCR repositories.
+WARNING: A long list of credential helpers may cause delays running 'docker build'. We recommend passing the registry name to configure o
+nly the registry you are using.
+After update, the following will be written to your Docker config file
+ located at [/home/taeeyoul/.docker/config.json]:
+ {
+  "credHelpers": {
+    "eu.gcr.io": "gcloud",
+    "staging-k8s.gcr.io": "gcloud",
+    "marketplace.gcr.io": "gcloud",
+    "gcr.io": "gcloud",
+    "us.gcr.io": "gcloud",
+    "asia.gcr.io": "gcloud"
+  }
+}
+Do you want to continue (Y/n)?  y
+Docker configuration file updated.
+taeeyoul@bastion-1:~$ docker-credential-gcloud list
+{
+  "https://asia.gcr.io": "_dcgcloud_token",
+  "https://eu.gcr.io": "_dcgcloud_token",
+  "https://gcr.io": "_dcgcloud_token",
+  "https://marketplace.gcr.io": "_dcgcloud_token",
+  "https://staging-k8s.gcr.io": "_dcgcloud_token",
+  "https://us.gcr.io": "_dcgcloud_token"
+}
+taeeyoul@bastion-1:~$ 
+```
+
 #### 실행 예
 ```
 $ docker tag nodejs-bot:1.0.5 asia.gcr.io/ttc-team-14/nodejs-bot:1.0.5
