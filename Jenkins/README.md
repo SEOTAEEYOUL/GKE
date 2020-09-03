@@ -6,6 +6,7 @@
 [Slack Notification](https://plugins.jenkins.io/slack/)  
 [Jenkins를 사용하여 Google Kubernetes Engine에 지속적으로 배포](https://cloud.google.com/solutions/continuous-delivery-jenkins-kubernetes-engine?hl=ko)  
 [How to Push Docker Image to Google Container Registry (GCR) through Jenkins Job](https://medium.com/google-cloud/how-to-push-docker-image-to-google-container-registry-gcr-through-jenkins-job-52b9d5ce9f7f)  
+[Container Registry 인증 방식](https://cloud.google.com/container-registry/docs/advanced-authentication)
 
 ![Jenkins Pipeline](https://cloud.google.com/solutions/images/jenkins-cd-container-engine.svg?hl=ko)
 
@@ -66,6 +67,12 @@ jenkins/README.md
     - configuration-as-code:1.41
 ```
 
+### 추가설치 Plugin
+[Slack Notification](https://plugins.jenkins.io/slack/)  
+[Google Authenticated Source](https://plugins.jenkins.io/google-source-plugin/)  
+
+  
+
 ### Helm 배포
 ```
 taeeyoul@cloudshell:~/workspace/ttc-infra/jenkins/jenkins (ttc-team-14)$ helm install jenkins . -n ttc-infra -f values.yaml
@@ -100,6 +107,22 @@ Google Container Registry Auth Plugin
 ```
 
 2) Create a service account.  
+```
+taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth activate-service-account tyseo-565@ttc-team-14.iam.gserviceaccount.com  --key-file=tyseo-565.json
+Activated service account credentials for: [tyseo-565@ttc-team-14.iam.gserviceaccount.com]
+taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth print-access-token | docker login -u oauth2accesstoken --password-
+stdin https://asia.gcr.io
+WARNING! Your password will be stored unencrypted in /home/taeeyoul/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+Login Succeeded
+taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth print-access-token | docker login -u oauth2accesstoken --password-
+stdin https://gcr.io
+WARNING! Your password will be stored unencrypted in /home/taeeyoul/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+Login Succeeded
+```
 
 
 3) Add Global Credential 
