@@ -6,7 +6,8 @@
 [Slack Notification](https://plugins.jenkins.io/slack/)  
 [Jenkins를 사용하여 Google Kubernetes Engine에 지속적으로 배포](https://cloud.google.com/solutions/continuous-delivery-jenkins-kubernetes-engine?hl=ko)  
 [How to Push Docker Image to Google Container Registry (GCR) through Jenkins Job](https://medium.com/google-cloud/how-to-push-docker-image-to-google-container-registry-gcr-through-jenkins-job-52b9d5ce9f7f)  
-[Container Registry 인증 방식](https://cloud.google.com/container-registry/docs/advanced-authentication)
+[* Container Registry 인증 방식 *](https://cloud.google.com/container-registry/docs/advanced-authentication)  
+[* GCR 배포를 위한 권한 *](https://cloud.google.com/container-registry/docs/access-control#permissions_and_roles)  
 
 ![Jenkins Pipeline](https://cloud.google.com/solutions/images/jenkins-cd-container-engine.svg?hl=ko)
 
@@ -107,9 +108,23 @@ Google Container Registry Auth Plugin
 ```
 
 2) Create a service account.  
+- 서비스 계정 추가 및 권한 추가
+> 스토리자 관리자
+> 스토리지 객체 뷰어
+
+- 서비스 계정의 Key 를 Json 형태로 받음  
+
+- Cloud SDK 서비스 계정 Login 하기  
+> gcloud auth activate-service-account ACCOUNT --key-file=KEY-FILE
+   
 ```
 taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth activate-service-account tyseo-565@ttc-team-14.iam.gserviceaccount.com  --key-file=tyseo-565.json
 Activated service account credentials for: [tyseo-565@ttc-team-14.iam.gserviceaccount.com]
+```
+
+- Access Token 을 가지고 Login   
+> Access Token 은 일시적으로 Container Registry와 연결하는 데 사용하기 한 시간 전에 요청합니다.  
+```
 taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth print-access-token | docker login -u oauth2accesstoken --password-
 stdin https://asia.gcr.io
 WARNING! Your password will be stored unencrypted in /home/taeeyoul/.docker/config.json.
@@ -125,5 +140,18 @@ Login Succeeded
 ```
 
 
-3) Add Global Credential 
-Jenkins -> Credentials -> Global Credentials -> Add Credentials
+3) Add Jenkinsfile 에 Docker login 추가
+> gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]
+> [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io
+
+
+- 오류 Case
+```
++ docker login -u oauth2accesstoken -p "ya29.c.Kp ... I-_uOiH" https//asia.gcr.io
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+```
+
+- 성공 Case
+```
+echo -n "ya29.c.Kp ... I-_uOiH"| docker login -u oauth2accesstoken --password-stdin https://asia.gcr.io
+```
