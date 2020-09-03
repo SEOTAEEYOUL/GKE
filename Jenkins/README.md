@@ -77,6 +77,19 @@ jenkins/README.md
 [Google Authenticated Source](https://plugins.jenkins.io/google-source-plugin/)  
 [Gitea](https://plugins.jenkins.io/gitea/)
 
+    
+1) Slack Notification : Jenkins 관리 > 시스템 설정 > Slack 설정
+  > Workspace : sk-tcl
+  > Credentail : SlackCI -> Slack 의 "Jenkins CI" 에서 Token 값을 가지고 있는 Credential"
+  > > Secret Type : "Secret text"
+  > Default channel / member id : ttc -> "Channel 명 앞에 '#' 이 없음(주의)"
+
+2) Gitea : Jenkins 관리 > 시스템 설정 > Gieta Servers
+  > Name : "TTC2020 team-14 Gitea Server"
+  > Server URL : "http://gitea.team14.sk-ttc.com"
+  > Manage hooks
+  >  > Credential -> Secret Type : "Username with password"
+
   
 
 ### Helm 배포
