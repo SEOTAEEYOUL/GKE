@@ -1,19 +1,20 @@
 # GKE
 
-[GKE 빠른 시작](https://cloud.google.com/kubernetes-engine/docs/quickstart)  
-[Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)  
-[GKE Sample](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)  
-  - [Redis 및 PHP로 방명록 만들기](https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook?hl=ko)
-  - [Persistent Disk 및 Cloud SQL로 GKE에 WordPress 배포](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk?hl=ko)
-[Kubernetes Applications](https://github.com/kubernetes-sigs/application/blob/master/README.md)
+#### Link  
+> [GKE 빠른 시작](https://cloud.google.com/kubernetes-engine/docs/quickstart)   
+> [Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)  
+> [GKE Sample](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)  
+  - [Redis 및 PHP로 방명록 만들기](https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook?hl=ko)  
+  - [Persistent Disk 및 Cloud SQL로 GKE에 WordPress 배포](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk?hl=ko)  
+> [Kubernetes Applications](https://github.com/kubernetes-sigs/application/blob/master/README.md)  
 
 
 
 ### 셸 선택
-  * 빠른 시작을 하려면 Cloud Shell 또는 로컬 셸을 사용
-  * Cloud Shell에는 gcloud 명령줄 도구와 kubectl 명령줄 도구가 사전 설치되어 있음
-    * gcloud 도구는 Google Cloud의 기본 명령줄 인터페이스를 제공
-    * kubectl은 Kubernetes 클러스터를 대상으로 명령어를 실행할 수 있는 기본 명령줄 인터페이스
+> 빠른 시작을 하려면 Cloud Shell 또는 로컬 셸을 사용  
+> Cloud Shell에는 gcloud 명령줄 도구와 kubectl 명령줄 도구가 사전 설치되어 있음  
+  * gcloud 도구는 Google Cloud의 기본 명령줄 인터페이스를 제공  
+  * kubectl은 Kubernetes 클러스터를 대상으로 명령어를 실행할 수 있는 기본 명령줄 인터페이스  
 
 #### Cloud 접속시 화면 
 ```
@@ -133,7 +134,7 @@ taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud config list
 disable_update_check = True
 [compute]
 gce_metadata_read_timeout_sec = 5
-zone = asia-northeast3
+zone = asia-northeast3-a
 [core]
 account = taeeyoul@gmail.com
 disable_usage_reporting = True
@@ -148,12 +149,14 @@ Your active configuration is: [cloudshell-22589]
 
 #### 단일 노드 클러스터
 ```
-gcloud container clusters create cluster-name --num-nodes=1
+CLUSTER_NAME="cluster-team14"
+gcloud container clusters create $CLUSTER_NAME --num-nodes=1
 ```
 
 ### 클러스터의 사용자 인증 정보 가져오기
 ```
-gcloud container clusters get-credentials __cluster-name__
+CLUSTER_NAME="cluster-team14"
+gcloud container clusters get-credentials $CLUSTER_NAME
 ```
 
 
