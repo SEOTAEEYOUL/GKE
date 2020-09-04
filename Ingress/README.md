@@ -23,6 +23,44 @@
 |cloud.google.com/neg | 이 주석을 사용하여 부하 분산기에서 네트워크 엔드포인트 그룹을 사용하도록 지정합니다. </br> 컨테이너 기반 부하 분산 사용을 참조하세요. |  
 
 
+#### 정상일때   
+  > 조회시 등록한 Host Backend 정보의 IP, Port No 가 표시됨  
+  > Annotations 에 "HEALTHY" 가 표시됨
+  > GCP 콘솔의 "부하분산" 를 조회시 정상으로 표기됨  
+   
+* kubectl 로  보기
+```
+taeeyoul@cloudshell:~/workspace/ttc-infra/ingress (ttc-team-14)$ ki describe ing ttc-infra
+Name:             ttc-infra
+Namespace:        ttc-infra
+Address:          34.107.213.157
+Default backend:  default-http-backend:80 (192.168.2.31:8080)
+Rules:
+  Host                            Path  Backends
+  ----                            ----  --------
+  prometheus.team14.sk-ttc.com
+                                  /*   prometheus-server:80 (192.168.2.21:9090)
+  alertmanager.team14.sk-ttc.com
+                                  /*   prometheus-alertmanager:80 (192.168.2.30:9093)
+  grafana.team14.sk-ttc.com
+                                  /*   grafana:80 (192.168.2.20:3000)
+  argocd.team14.sk-ttc.com
+                                  /*   argocd-server:80 (192.168.2.23:8080)
+  gitea.team14.sk-ttc.com
+                                  /*   gitea-gitea-http:3000 (192.168.2.27:3000)
+  jenkins.team14.sk-ttc.com
+                                  /*   jenkins:8080 (192.168.2.28:8080)
+Annotations:                      ingress.kubernetes.io/backends:
+                                    {"k8s-be-30210--011a2b9a78e503d3":"HEALTHY","k8s-be-30421--011a2b9a78e503d3":"HEALTHY","k8s-be-31271--011a2b9a78e503d3":"HEALTHY","k8s-be-...
+                                  ingress.kubernetes.io/forwarding-rule: k8s2-fr-crjzahb8-ttc-infra-ttc-infra-lb01do1z
+                                  ingress.kubernetes.io/target-proxy: k8s2-tp-crjzahb8-ttc-infra-ttc-infra-lb01do1z
+                                  ingress.kubernetes.io/url-map: k8s2-um-crjzahb8-ttc-infra-ttc-infra-lb01do1z
+                                  meta.helm.sh/release-name: ttc
+                                  meta.helm.sh/release-namespace: ttc-infra
+Events:                           <none>
+```
+
+
 #### Ingress 오류 조회  
 ```
 taeeyoul@cloudshell:~ (ttc-team-14)$ kubectl get events --all-namespaces --field-selector involvedObject.kind=Ingress
