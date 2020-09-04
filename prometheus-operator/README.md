@@ -1,5 +1,7 @@
 # Prometheus-operator
 
+### 현재 사용치 않음 (Prometheus, Grafana 로 설치 변경)
+
 ### Link
 * [prometheus-operator](https://coreos.com/blog/the-prometheus-operator.html)  
 * [prometheus-operator - getting-started](https://coreos.com/operators/prometheus/docs/latest/user-guides/getting-started.html)  
