@@ -7,6 +7,20 @@ taeeyoul@cloudshell:~/workspace/ttc-infra/argocd/argo-cd (ttc-team-14)$ helm ins
 manifest_sorter.go:192: info: skipping unknown hook: "crd-install"
 manifest_sorter.go:192: info: skipping unknown hook: "crd-install"
 NAME: argocd
+LAST DEPLOYED: Thu Sep  3 08:48:29 2020
+NAMESPACE: ttc-infra
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+In order to access the server UI you have the following options:
+1. kubectl port-forward service/argocd-server -n ttc-infra 8080:443
+    and then open the browser on http://localhost:8080 and accept the certificate
+2. enable ingress in the values file `service.ingress.enabled` and either
+taeeyoul@cloudshell:~/workspace/ttc-infra/argocd/argo-cd (ttc-team-14)$ helm install argocd . -n ttc-infra -f values.yaml
+manifest_sorter.go:192: info: skipping unknown hook: "crd-install"
+manifest_sorter.go:192: info: skipping unknown hook: "crd-install"
+NAME: argocd
 LAST DEPLOYED: Fri Aug 28 01:55:25 2020
 NAMESPACE: ttc-infra
 STATUS: deployed

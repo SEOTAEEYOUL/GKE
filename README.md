@@ -2,13 +2,16 @@
 
 #### Link  
 > [GKE 빠른 시작](https://cloud.google.com/kubernetes-engine/docs/quickstart)   
+> [클러스터 아키텍처](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture?hl=ko)
 > [Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)  
 > [GKE Sample](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)  
-  - [Redis 및 PHP로 방명록 만들기](https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook?hl=ko)  
-  - [Persistent Disk 및 Cloud SQL로 GKE에 WordPress 배포](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk?hl=ko)  
+  > [Redis 및 PHP로 방명록 만들기](https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook?hl=ko)  
+  > [Persistent Disk 및 Cloud SQL로 GKE에 WordPress 배포](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk?hl=ko)  
 > [Kubernetes Applications](https://github.com/kubernetes-sigs/application/blob/master/README.md)  
+   
 
-
+![클러스터아키텍처](https://cloud.google.com/kubernetes-engine/images/cluster-architecture.svg?hl=ko)
+    
 
 ### 셸 선택
 > 빠른 시작을 하려면 Cloud Shell 또는 로컬 셸을 사용  
@@ -431,20 +434,3 @@ xpnProjectStatus: UNSPECIFIED_XPN_PROJECT_STATUS
 gcloud container clusters delete cluster-name
 ```
 
----  
-
-#### …or create a new repository on the command line
-```
-echo "# GKE" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/SEOTAEEYOUL/GKE.git
-git push -u origin master
-```
-
-#### …or push an existing repository from the command line
-```
-git remote add origin https://github.com/SEOTAEEYOUL/GKE.git
-git push -u origin master
-```
