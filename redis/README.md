@@ -1,5 +1,9 @@
 # Redis
 
+
+![Redis HA](https://miro.medium.com/max/700/1*7AfXYNub6eC9j21-JZ-f-A.png)
+
+
 ### Redis Service 변경  
 - redis service 가 master 만 바라 보도록 수정  
 ```
@@ -45,25 +49,6 @@ To connect to your database from outside the cluster execute the following comma
     redis-cli -h 127.0.0.1 -p 6379 -a $REDIS_PASSWORD
 ```  
   
-```
-taeeyoul@cloudshell:~/workspace/tcc-app/redis-ha (ttc-team-14)$ helm install redis-ha . -n ttc-app -f values.yaml
-NAME: redis-ha
-LAST DEPLOYED: Wed Aug 26 00:07:55 2020
-NAMESPACE: ttc-app
-STATUS: deployed
-REVISION: 1
-NOTES:
-Redis can be accessed via port 6379 and Sentinel can be accessed via port 26379 on the following DNS name from within your cluster:
-redis-ha.ttc-app.svc.cluster.local
-To connect to your Redis server:
-1. Run a Redis pod that you can use as a client:
-   kubectl exec -it redis-ha-server-0 sh -n ttc-app
-2. Connect using the Redis CLI:
-  redis-cli -h redis-ha.ttc-app.svc.cluster.local
-taeeyoul@cloudshell:~/workspace/tcc-app/redis-ha (ttc-team-14)$ pwd
-/home/taeeyoul/workspace/tcc-app/redis-ha
-```
-
 
 #### 배포된 Pod 확인  
 ```
@@ -110,50 +95,31 @@ endpoints/redis-headless   192.168.0.7:26379,192.168.2.6:26379,192.168.3.2:26379
 endpoints/redis-metrics    192.168.0.7:9121,192.168.2.6:9121,192.168.3.2:9121                  7m11s
 ```
 
-
-## Sample 배포하기
-
-```
-taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud config set compute/zone asia-northeast3
-Updated property [compute/zone].
-taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud config list
-[component_manager]
-disable_update_check = True
-[compute]
-gce_metadata_read_timeout_sec = 5
-zone = asia-northeast3
-[core]
-account = taeeyoul@gmail.com
-disable_usage_reporting = True
-project = ttc-team-14
-[metrics]
-environment = devshell
-Your active configuration is: [cloudshell-24793]
-taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud container clusters create guestbook --num-nodes=4
-WARNING: Currently VPC-native is not the default mode during cluster creation. In the future, this will become the default mode and can be disabled using `--no-enable-ip-alias` flag. Use `--[no-]enable-ip-alias` flag to sup
-press this warning.
-WARNING: Newly created clusters and node-pools will have node auto-upgrade enabled by default. This can be disabled using the `--no-enable-autoupgrade` flag.
-WARNING: Starting with version 1.18, clusters will have shielded GKE nodes by default.
-WARNING: Your Pod address range (`--cluster-ipv4-cidr`) can accommodate at most 1008 node(s).
-This will enable the autorepair feature for nodes. Please see https://cloud.google.com/kubernetes-engine/docs/node-auto-repair for more information on node autorepairs.
-ERROR: (gcloud.container.clusters.create) ResponseError: code=403, message=Insufficient regional quota to satisfy request: resource "IN_USE_ADDRESSES": request requires '12.0' and is short '7.0'. project has a quota of '8.0
-' with '5.0' available. View and manage quotas at https://console.cloud.google.com/iam-admin/quotas?usage=USED&project=ttc-team-14.
-taeeyoul@cloudshell:~ (ttc-team-14)$ gcloud container clusters list
-NAME            LOCATION         MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION   NUM_NODES  STATUS
-cluster-team14  asia-northeast3  1.16.13-gke.1   34.64.109.235  e2-standard-2  1.16.13-gke.1  3          RUNNING
-```
-
-#### Redis   Count  
+#### Redis Pod 접속 후 정보 확인
+* 접속  
 ```
 taeeyoul@cloudshell:~/workspace/app/redis (ttc-team-14)$ ka exec redis-master-0 -c redis -it bash
 I have no name!@redis-master-0:/$ redis-cli -a ttc2020!
 Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+127.0.0.1:6379> 
+```
+
+* keyspace 보기  
+```
 127.0.0.1:6379> info keyspace
 # Keyspace
 db0:keys=1542,expires=146,avg_ttl=274258985
+```
+
+* cluster 보기  
+```
 127.0.0.1:6379> info cluster
 # Cluster
 cluster_enabled:0
+```
+
+* 접속한 clients 보기  
+```
 127.0.0.1:6379> info clients
 # Clients
 connected_clients:7
@@ -162,6 +128,10 @@ client_recent_max_output_buffer:0
 blocked_clients:0
 tracking_clients:0
 clients_in_timeout_table:0
+```
+
+* 서버 정보 보기  
+```
 127.0.0.1:6379> info Server
 # Server
 redis_version:6.0.6
@@ -184,6 +154,10 @@ configured_hz:10
 lru_clock:4769453
 executable:/redis-server
 config_file:/opt/bitnami/redis/etc/redis.conf
+```
+
+* 접속 종료  
+```
 127.0.0.1:6379> quit
 I have no name!@redis-master-0:/$
 ```
