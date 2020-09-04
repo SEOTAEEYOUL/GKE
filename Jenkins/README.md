@@ -123,14 +123,14 @@ taeeyoul@cloudshell:~/workspace/ttc-infra/jenkins/jenkins (ttc-team-14)$
 - 현재 access token 방식은 1 시간 유효 이므로, 매 배포시 만들어 넣어 주어야 함  
    
 1) 서비스 계정 추가 및 권한 추가
-- 부여할 권한
-> 스토리자 관리자
-> 스토리지 객체 뷰어
+- 부여할 권한  
+> 스토리자 관리자  
+> 스토리지 객체 뷰어  
 
 2) 서비스 계정의 Key 를 Json 형태로 받음  
 
 - Cloud SDK 서비스 계정 Login 하기  
-> gcloud auth activate-service-account ACCOUNT --key-file=KEY-FILE
+> gcloud auth activate-service-account ACCOUNT --key-file=KEY-FILE  
    
 ```
 taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth activate-service-account tyseo-565@ttc-team-14.iam.gserviceaccount.com  --key-file=tyseo-565.json
@@ -138,7 +138,8 @@ Activated service account credentials for: [tyseo-565@ttc-team-14.iam.gserviceac
 ```
 
 - Access Token 을 가지고 Login   
-> Access Token 은 일시적으로 Container Registry와 연결하는 데 사용하기 한 시간 전에 요청합니다.  
+> Access Token 은 현재 로그인한 사용자의 것으로 *gcloud auth print-access-token* 명령으로 획득 
+> 일시적으로 Container Registry와 연결하는 데 사용하기 한 시간 전에 요청합니다.  
 ```
 taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth print-access-token | docker login -u oauth2accesstoken --password-
 stdin https://asia.gcr.io
