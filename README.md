@@ -4,10 +4,10 @@
 > [GKE 빠른 시작](https://cloud.google.com/kubernetes-engine/docs/quickstart)   
 > [클러스터 아키텍처](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture?hl=ko)
 > [Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features?hl=ko)  
+> [Kubernetes Applications](https://github.com/kubernetes-sigs/application/blob/master/README.md)  
 > [GKE Sample](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)  
 > > [Redis 및 PHP로 방명록 만들기](https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook?hl=ko)  
 > > [Persistent Disk 및 Cloud SQL로 GKE에 WordPress 배포](https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk?hl=ko)  
-> [Kubernetes Applications](https://github.com/kubernetes-sigs/application/blob/master/README.md)  
    
 
 ![클러스터아키텍처](https://cloud.google.com/kubernetes-engine/images/cluster-architecture.svg?hl=ko)
