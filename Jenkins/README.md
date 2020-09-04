@@ -124,13 +124,13 @@ taeeyoul@cloudshell:~/workspace/ttc-infra/jenkins/jenkins (ttc-team-14)$
    
 1) 서비스 계정 추가 및 권한 추가
 - 부여할 권한  
-> 스토리자 관리자  
-> 스토리지 객체 뷰어  
+  > 스토리자 관리자  
+  > 스토리지 객체 뷰어  
 
 2) 서비스 계정의 Key 를 Json 형태로 받음  
 
 - Cloud SDK 서비스 계정 Login 하기  
-> gcloud auth activate-service-account ACCOUNT --key-file=KEY-FILE  
+  > gcloud auth activate-service-account ACCOUNT --key-file=KEY-FILE  
    
 ```
 taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth activate-service-account tyseo-565@ttc-team-14.iam.gserviceaccount.com  --key-file=tyseo-565.json
@@ -157,8 +157,8 @@ Login Succeeded
 
 
 3) Add Jenkinsfile 에 Docker login 추가
-> gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]  
-> [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io  
+  > gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]  
+  > [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io  
 
 
 - 오류 Case
