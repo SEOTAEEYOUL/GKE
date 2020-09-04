@@ -136,11 +136,11 @@ taeeyoul@cloudshell:~/workspace/ttc-infra/jenkins/jenkins (ttc-team-14)$
 taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth activate-service-account tyseo-565@ttc-team-14.iam.gserviceaccount.com  --key-file=tyseo-565.json
 Activated service account credentials for: [tyseo-565@ttc-team-14.iam.gserviceaccount.com]
 ```
-
-- Access Token 을 가지고 Login   
-> Access Token 은 현재 로그인한 사용자의 것으로 *gcloud auth print-access-token* 명령으로 획득 
-> 일시적으로 Container Registry와 연결하는 데 사용하기 한 시간 전에 요청합니다.  
-```
+   
+- Access Token 을 가지고 Login 하기   
+  > Access Token 은 현재 로그인한 사용자의 것으로 *gcloud auth print-access-token* 명령으로 획득   
+  > 일시적으로 Container Registry와 연결하는 데 사용하기 한 시간 전에 요청합니다.   
+```   
 taeeyoul@bastion-1:~/workspace/ttc-infra/Jenkins$ gcloud auth print-access-token | docker login -u oauth2accesstoken --password-
 stdin https://asia.gcr.io
 WARNING! Your password will be stored unencrypted in /home/taeeyoul/.docker/config.json.
@@ -157,8 +157,8 @@ Login Succeeded
 
 
 3) Add Jenkinsfile 에 Docker login 추가
-> gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]
-> [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io
+> gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]  
+> [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io  
 
 
 - 오류 Case
