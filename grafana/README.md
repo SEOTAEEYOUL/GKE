@@ -3,6 +3,7 @@
 * Kubernetes Helm Chart Stable 의 것을 사용함
 * Helm Chart 를 받은 후 Local 에 풀어서 설치하는 형태를 사용함
 * 기본 values.yaml 를 수정하여 설치하는 방식을 사용 (-f 사용은 kubeapps 에서 설정이 보이게 하기 위함
+* Ingress 부분을 설치 후 삭제함 -> 정상 테스트 용도로 사용하고 ttc-infra Ingress 에 rule 을 추가함
 
 
 #### Search & Fetch
