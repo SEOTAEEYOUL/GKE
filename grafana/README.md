@@ -51,6 +51,78 @@ grafana/dashboards/custom-dashboard.json
 taeeyoul@cloudshell:~/workspace/ttc-infra/grafana$
 ```
 
+
+#### Vaulue.yaml 설정 변경 부분  
+- Ingress 사용을 위한 Service Type 변경 (ClusterIP -> NodePort)  
+```
+service:
+  type: NodePort
+  port: 80
+  targetPort: 3000
+    # targetPort: 4181 To be used with a proxy extraContainer
+  annotations: {}
+  labels: {}
+  portName: service
+```
+
+- Admin Password 설정 (team14 공용 Password 적용)  
+```
+# Administrator credentials when not using an existing secret (see below)
+adminUser: admin
+adminPassword: ********
+```
+   
+   
+- Resources 절을 활성화 (Guaranteed 모드 설정)  
+```
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+.
+.
+.
+```
+   
+- Persistent Volume 적용(현재 default 는 nfs-sc 임)  
+```
+persistence:
+  type: pvc
+  enabled: true
+  # storageClassName: default
+  accessModes:
+    # - ReadWriteOnce
+    - ReadWriteMany
+  size: 10Gi
+  # annotations: {}
+  finalizers:
+    - kubernetes.io/pvc-protection
+  # subPath: ""
+  # existingClaim:
+```
+   
+- DataSource 절에 Prometheus 정보 입력  
+```
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.ttc-infra.svc.cluster.local
+      access: proxy
+      isDefault: true
+```
+   
+- 기본 Dashboard ConfigMap 활성화  
+```
+dashboardsConfigMaps:
+  default: "grafana-dashboard"
+```
+   
 #### Install  
 ```
 taeeyoul@cloudshell:~/workspace/ttc-infra/grafana/grafana$ helm install grafana . -n ttc-infra -f values.yaml
@@ -82,4 +154,105 @@ NOTES:
    From outside the cluster, the server URL(s) are:
      http://grafana.team14.sk-ttc.com
 3. Login with the password from step 1 and the username: admin
+```
+   
+#### 기본 Dashboard 작성 및 추가   
+- Dashboard 를 jsong 형태로 저장  
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: grafana
+    meta.helm.sh/release-namespace: ttc-infra
+  labels:
+    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 7.1.1
+    helm.sh/chart: grafana-5.5.5
+  name: grafana-dashboard
+  namespace: ttc-infra
+data:
+  microservice-dashbaord.json: |-
+    {
+      "annotations": {
+.
+.
+.
+     "timezone": "",
+      "title": "Micro Service Pods Core Usage",
+      "uid": "kube-system-app-status-dashboard",
+      "version": 5
+    }
+  apache-dashbaord.json: |-
+    { 
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+.
+.
+.
+      },
+      "timezone": "",
+      "title": "Apache",
+      "uid": "Z9pbY-HWk",
+      "version": 2
+    }
+  reids-dashbaord.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+.
+.
+.
+          }
+        ]
+      },
+      "time": {
+        "from": "now-24h",
+        "to": "now"
+      },
+      "timepicker": {
+        "refresh_intervals": [
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ],
+        "time_options": [
+          "5m",
+          "15m",
+          "1h",
+          "6h",
+          "12h",
+          "24h",
+          "2d",
+          "7d",
+          "30d"
+        ]
+      },
+      "timezone": "browser",
+      "title": "Redis Status",
+      "uid": "LKSa_7Liz",
+      "version": 29
+    }
 ```
