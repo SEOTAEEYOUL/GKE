@@ -1,5 +1,9 @@
 # Grafana 
 
+* Kubernetes Helm Chart Stable 의 것을 사용함
+* Helm Chart 를 받은 후 Local 에 풀어서 설치하는 형태를 사용함
+* 기본 values.yaml 를 수정하여 설치하는 방식을 사용 (-f 사용은 kubeapps 에서 설정이 보이게 하기 위함
+
 
 #### Search & Fetch
 ```
@@ -137,7 +141,7 @@ NOTES:
 2. The Grafana server can be accessed via port 80 on the following DNS name from within your cluster:
    grafana.ttc-infra.svc.cluster.local
    If you bind grafana to 80, please update values in values.yaml and reinstall:
-   ```
+   ...
    securityContext:
      runAsUser: 0
      runAsGroup: 0
@@ -148,7 +152,7 @@ NOTES:
    - "/usr/sbin/grafana-server &&"
    - "sh"
    - "/run.sh"
-   ```
+   ...
    Details refer to https://grafana.com/docs/installation/configuration/#http-port.
    Or grafana would always crash.
    From outside the cluster, the server URL(s) are:
