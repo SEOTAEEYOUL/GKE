@@ -1,5 +1,9 @@
 # Gitea
 
+* Source 및 Manifest 저장소로 사용하기 위해 설치함
+* Helm Chart stable 의 것을 사용
+* 설치 후 git push event 발생을 위한 Slack 알림 전송과 CI 를 위해 Jenkins 연동 webhook 을 설정함
+
 ### Install  
 ```
 taeeyoul@cloudshell:~/workspace/ttc-infra/gitea/gitea (ttc-team-14)$ helm install gitea . -n ttc-infra -f values.yaml
@@ -63,4 +67,14 @@ Events:
   Warning  FailedScheduling   15s (x3 over 103s)   default-scheduler   0/3 nodes are available: 3 node(s) had volume node affinity conflict.
 ```
 
-
+### Webhook 연동   
+- Slack Webhook 연동
+  - Slack Incoming webhook 정보와 채널명을 넣어 주면됨
+    - 대상 URL : https://hooks.slack.com/services/*********/*********/************************
+    - 채널 : # ttc
+- Jenkin Webhook 연동
+  - Jenkins 에 Gitea Plugin 인 설치 후 Gitea 서버 정보를 입력
+  - Jenkins webhook 입력 
+    - webhook :   http://jenkins.team14.sk-ttc.com/gitea-webhook/post?job=nodejs-bot
+    - HTTP Method : POST
+    - POST Content Type : application/json
