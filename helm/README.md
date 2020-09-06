@@ -1,5 +1,7 @@
 # Helm
 
+- OSS Package 설치를 위해 Helm3 Client 설치하여 사용함
+
 ### Install
 
 ```
