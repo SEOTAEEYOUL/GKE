@@ -163,6 +163,9 @@ NOTES:
    
 #### 기본 Dashboard 작성 및 추가   
 - Dashboard 를 jsong 형태로 저장  
+  - MicroServiceDashboard : ttc-app 의 pod 와 redis 정보 보기
+  - Apache : Apache Overview
+  - Redis : Redis Overview - Key 개수, Master, Slave 상태 보기
 ```
 apiVersion: v1
 kind: ConfigMap
