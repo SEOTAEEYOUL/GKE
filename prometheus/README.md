@@ -36,7 +36,7 @@ version: 11.12.1
 ### values.yaml 의 설정값 변경 
 - Persistent Volume 사용 설정  
   - default StorageClass 사용 설정
-```
+  ```
   persistentVolume:
     ## If true, Prometheus server will create/use a Persistent Volume Claim
     ## If false, use emptyDir
@@ -65,10 +65,10 @@ version: 11.12.1
     ##   GKE, AWS & OpenStack)
     ##
     # storageClass: "-"
-```
+  ```
    
 - Container Memory 설지 (Guruantted)  
-```
+  ```
   ## Prometheus server resource requests and limits
   ## Ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
@@ -79,10 +79,10 @@ version: 11.12.1
     requests:
       cpu: 100m
       memory: 2048Mi
-```
+  ```
    
 - Ingress 사용을 위해 ServiceType 설정(NodePort)  
-```
+  ```
   service:
     annotations: {}
     labels: {}
@@ -97,14 +97,14 @@ version: 11.12.1
     sessionAffinity: None
     # type: ClusterIP
     type: NodePort
-```
+  ```
     
 - 보관 주기 (15d)  
-```
+  ```
   ## Prometheus data retention period (default if not specified is 15 days)
   ##
   retention: "15d"
-```
+  ```
    
 ### Install  
 ```
@@ -144,7 +144,7 @@ https://prometheus.io/
 ### 설치 후 작업  
 #### Prometheus Alerting Rules 설정  
 - "prometheus-server" ConfigMap 내의 alerting_rules.yml 에 Alerting Rules 설정  
-```
+   ```
     - name: application.rules
       rules:
       - alert: api_high_median_response_time
@@ -191,7 +191,7 @@ e, pod_name) avg(kube_pod_container_resource_limits_cpu_cores) by (pod, containe
 .
 .
 
-```
+   ```
 
 
 #### AlertManager 설정
