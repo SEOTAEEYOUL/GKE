@@ -155,19 +155,16 @@ https://prometheus.io/
         annotations:
           summary: "High median response time on {{ $labels.app }} and {{ $labels.method }} {{ $labels.route }}"
       - alert: chk_pod_cpu_high_utilization
-        expr: round(100 * label_join(label_join(sum(rate(container_cpu_usage_seconds_total{container_name != "POD", image !=""}[1m
-])) by (pod_name, container_name, namespace) , "pod", "", "pod_name"), "container", "", "container_name") / ignoring(container_nam
-e, pod_name) avg(kube_pod_container_resource_limits_cpu_cores) by (pod, container, namespace)) > 95
+        expr: round(100 * label_join(label_join(sum(rate(container_cpu_usage_seconds_total{container_name != "POD", image !=""}[1m])) by (pod_name, container_name, namespace) , "pod", "", "pod_name"), "container", "", "container_name") / ignoring(container_name, pod_name) avg(kube_pod_container_resource_limits_cpu_cores) by (pod, container, namespace)) > 95
         for: 1m
         labels:
           severity: info
         annotations:
           summary: 'CPU 사용량이 높은 POD {{$labels.pod}} on{{$labels.container}}'
-          description: 'pod[{{$labels.namespace}}/{{$labels.pod}}] 의 container[{{$labels.container}}] CPU 사용량 [{{$value}} %]  
-높습니다'
-.
-.
-.
+          description: 'pod[{{$labels.namespace}}/{{$labels.pod}}] 의 container[{{$labels.container}}] CPU 사용량 [{{$value}} %]  높습니다'
+    .
+    .
+    .
     - name: redis.rules
       rules:
       - alert: redis_slave_abnormal
@@ -185,8 +182,7 @@ e, pod_name) avg(kube_pod_container_resource_limits_cpu_cores) by (pod, containe
           severity: critical
         annotations:
           summary: 'Redis "{{ $labels.release }}" is between Master and Slave data unsynchronized'
-          description: 'Redis "{{ $labels.release }}" 마스터 연결 다운: Redis "{{ $labels.release }}" 가 마스터-슬레이브 싱크가 안
-됨'
+          description: 'Redis "{{ $labels.release }}" 마스터 연결 다운: Redis "{{ $labels.release }}" 가 마스터-슬레이브 싱크가 안됨'
 .
 .
 .
