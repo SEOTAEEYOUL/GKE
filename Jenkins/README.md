@@ -157,8 +157,8 @@ Login Succeeded
 
 
 3) Add Jenkinsfile 에 Docker login 추가
-  - gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]  
-  - [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io   
+  > gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]  
+  > [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io   
    
   - Jenkinsfile 의 일부   
   
