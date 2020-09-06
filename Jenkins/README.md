@@ -173,18 +173,17 @@ Login Succeeded
 
   sh "echo -n ${gcloud_access_token} | docker login -u oauth2accesstoken --password-stdin https://${image_server}"
   sh "docker push ${image_server}/${namespace}/${app}:${version}"
-  slackSend(channel: "ttc", color: '#0000FF', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}] - Checkout & B
-uild, Push' (${env.BUILD_URL})")
+  slackSend(channel: "ttc", color: '#0000FF', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}] - Checkout & Build, Push' (${env.BUILD_URL})")
 
   ```
 
 - 오류 Case
-```
-+ docker login -u oauth2accesstoken -p "ya29.c.Kp ... I-_uOiH" https//asia.gcr.io
-WARNING! Using --password via the CLI is insecure. Use --password-stdin.
-```
+  ```
+  + docker login -u oauth2accesstoken -p "ya29.c.Kp ... I-_uOiH" https//asia.gcr.io
+  WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+  ```
 
 - 성공 Case
-```
-echo -n "ya29.c.Kp ... I-_uOiH"| docker login -u oauth2accesstoken --password-stdin https://asia.gcr.io
-```
+  ```
+  echo -n "ya29.c.Kp ... I-_uOiH"| docker login -u oauth2accesstoken --password-stdin https://asia.gcr.io
+  ```
