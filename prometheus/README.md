@@ -223,6 +223,5 @@ e, pod_name) avg(kube_pod_container_resource_limits_cpu_cores) by (pod, containe
         icon_emoji: ':crocodile:'
         icon_url: '{{ template "slack.default.iconurl" . }}'
         title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] 모니터링 이벤트 알림'
-        text: "{{ range .Alerts }} *경고:* _{{ .Labels.alertname }}_\n*심각도:* `{{ .Labels.severity }}`\n*환경:* *TTC.team14*\n*:
-* {{ .Annotations.summary }}\n*내용:* {{ .Annotations.description }}\n{{ end }}"
-  ```
+        text: "{{ range .Alerts }} *경고:* _{{ .Labels.alertname }}_\n*심각도:* `{{ .Labels.severity }}`\n*환경:* *TTC.team14*\n*: * {{ .Annotations.summary }}\n*내용:* {{ .Annotations.description }}\n{{ end }}"
+  ```   
