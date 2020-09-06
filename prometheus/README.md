@@ -183,11 +183,10 @@ https://prometheus.io/
         annotations:
           summary: 'Redis "{{ $labels.release }}" is between Master and Slave data unsynchronized'
           description: 'Redis "{{ $labels.release }}" 마스터 연결 다운: Redis "{{ $labels.release }}" 가 마스터-슬레이브 싱크가 안됨'
-.
-.
-.
-
-   ```
+    .
+    .
+    .
+    ```
 
 
 #### AlertManager 설정
