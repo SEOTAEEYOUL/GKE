@@ -67,7 +67,7 @@ version: 11.12.1
     # storageClass: "-"
   ```
    
-- Container Memory 설지 (Guruantted)  
+- Container Memory 설정 (guaranteed mode)  
   ```
   ## Prometheus server resource requests and limits
   ## Ref: http://kubernetes.io/docs/user-guide/compute-resources/
