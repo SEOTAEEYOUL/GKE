@@ -5,7 +5,7 @@
 * Local 에 받아서 설치하는 형태를 취함
 
 
-#### 정보 보기
+### 정보 보기
 ```
 taeeyoul@bastion-1:~/workspace/ttc-infra/prometheus$ helm show chart stable/prometheus --version 11.12.0
 apiVersion: v1
@@ -31,9 +31,9 @@ version: 11.12.1
 ```
 
     
-### stable/prometheus 설치
+## stable/prometheus 설치
 
-#### values.yaml 의 설정값  
+### values.yaml 의 설정값 변경 
 - Persistent Volume 사용 설정  
   - default StorageClass 사용 설정
 ```
@@ -106,7 +106,7 @@ version: 11.12.1
   retention: "15d"
 ```
    
-#### Install  
+### Install  
 ```
 taeeyoul@cloudshell:~/workspace/ttc-infra/prometheus/prometheus$ helm install prometheus . -n ttc-infra -f values.yaml
 NAME: prometheus
@@ -207,15 +207,9 @@ e, pod_name) avg(kube_pod_container_resource_limits_cpu_cores) by (pod, containe
      route:
       group_by: ['job']
       group_interval: 5m
-      # group_wait: 10s
       group_wait: 30s
       receiver: slack-notifications
-      # repeat_interval: 3h
       repeat_interval: 12h
-      # routes:
-      # - match:
-      #     alertname: Watchdog
-      #   receiver: 'null'   ```
      
     ```
   - "receivers" 내에 Slack Alert Format 설정  
@@ -231,8 +225,4 @@ e, pod_name) avg(kube_pod_container_resource_limits_cpu_cores) by (pod, containe
         title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] 모니터링 이벤트 알림'
         text: "{{ range .Alerts }} *경고:* _{{ .Labels.alertname }}_\n*심각도:* `{{ .Labels.severity }}`\n*환경:* *TTC.team14*\n*:
 * {{ .Annotations.summary }}\n*내용:* {{ .Annotations.description }}\n{{ end }}"
-        # text: "{{ range .Alerts }} *경고:* _{{ .Labels.alertname }}_\n*심각도:* `{{ .Labels.severity }}`\n*환경:* *SK TTC Alert 
-*\n*Runbook:* <{{ .Annotations.runbook }}|:spiral_note_pad:>\n*내용:* {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value 
-}}\n{{ end }}\n{{ end }}"
-        # text: '{{ template "__custom_text" . }}'
   ```
