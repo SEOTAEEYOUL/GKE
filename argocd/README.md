@@ -205,7 +205,7 @@ TEST SUITE: None
 ```
 
 ### 설치 후 Slack Notification 설정하기
-- App 조회
+- ArgoCD 에서 만든 App 조회
   ```
   taeeyoul@bastion-1:~/workspace/ttc-infra/argocd/argocd-notifications$ ki get app
   NAME         AGE
