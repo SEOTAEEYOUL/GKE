@@ -198,7 +198,9 @@ https://prometheus.io/
       slack_api_url: https://hooks.slack.com/services/TM5CQKE5U/BMSEKU648/------------------------
 
     ```
+   
   - "route" 내의 "receiver" 설정
+    ```
      route:
       group_by: ['job']
       group_interval: 5m
