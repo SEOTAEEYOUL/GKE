@@ -158,8 +158,24 @@ Login Succeeded
 
 3) Add Jenkinsfile 에 Docker login 추가
   > gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://[HOSTNAME]  
-  > [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io  
+  > [HOSTNAME] gcr.io, us.gcr.io, eu.gcr.io 또는 asia.gcr.io   
+  > Jenkinsfile 의 일부   
+  
+  ```
+  def image_server="asia.gcr.io"
+  def gcloud_access_token="...."
+  def cicd_namespace="ttc-infra"
+  def namespace="ttc-team-14"
 
+  def app="nodejs-bot"
+  def version="1.0.7"
+
+  sh "echo -n ${gcloud_access_token} | docker login -u oauth2accesstoken --password-stdin https://${image_server}"
+  sh "docker push ${image_server}/${namespace}/${app}:${version}"
+  slackSend(channel: "ttc", color: '#0000FF', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}] - Checkout & B
+uild, Push' (${env.BUILD_URL})")
+
+  ```
 
 - 오류 Case
 ```
