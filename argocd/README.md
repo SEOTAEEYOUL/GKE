@@ -1,5 +1,13 @@
 # ArgoCD
 
+- Kubernetes 를 위한 선언적, 지속적 배포(CD) GitOps 도구
+
+### Link
+[ArgoCD](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd)
+
+
+![Architecture](https://argoproj.github.io/argo-cd/assets/argocd_architecture.png)
+
 ## ArgoCD
 
 ### ArgoCD 정보 보기
