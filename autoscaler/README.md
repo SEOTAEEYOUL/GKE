@@ -36,3 +36,32 @@ proxy                Deployment/proxy                1%/30%          3         9
 wordpress            Deployment/wordpress            19%/30%         3         30        3          3d19h
 wordpress-20200903   Deployment/wordpress-20200903   <unknown>/30%   3         30        3          17h
 ```
+
+### Cronjob
+- Cronjob 를 통합 주기 실행 예
+```
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: scale-out
+spec:
+  # schedule: "*/2 * * * *"
+  schedule: "30 9 * * 6"
+  startingDeadlineSeconds: 200
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccount: nodejs-bot
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl:1.16.13
+            command:
+            - /bin/sh
+            - -c
+            - kubectl -n ttc-app scale --replicas=5 deploy/wordpress
+            # - kubectl -n ttc-app get pod
+            # - version
+          restartPolicy: OnFailure
+```
